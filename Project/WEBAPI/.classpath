@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<classpath>
+	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-1.8"/>
+	<classpathentry kind="src" path="src"/>
+	<classpathentry kind="lib" path="C:/Users/Dylan/eclipse-workspace/spring/spring-framework-5.0.1.RELEASE/libs/spring-aop-5.0.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dylan/eclipse-workspace/spring/spring-framework-5.0.1.RELEASE/libs/spring-aspects-5.0.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dylan/eclipse-workspace/spring/spring-framework-5.0.1.RELEASE/libs/spring-beans-5.0.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dylan/eclipse-workspace/spring/spring-framework-5.0.1.RELEASE/libs/spring-context-5.0.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dylan/eclipse-workspace/spring/spring-framework-5.0.1.RELEASE/libs/spring-context-indexer-5.0.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dylan/eclipse-workspace/spring/spring-framework-5.0.1.RELEASE/libs/spring-context-support-5.0.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dylan/eclipse-workspace/spring/spring-framework-5.0.1.RELEASE/libs/spring-core-5.0.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dylan/eclipse-workspace/spring/spring-framework-5.0.1.RELEASE/libs/spring-expression-5.0.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dylan/eclipse-workspace/spring/spring-framework-5.0.1.RELEASE/libs/spring-instrument-5.0.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dylan/eclipse-workspace/spring/spring-framework-5.0.1.RELEASE/libs/spring-jcl-5.0.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dylan/eclipse-workspace/spring/spring-framework-5.0.1.RELEASE/libs/spring-jdbc-5.0.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dylan/eclipse-workspace/spring/spring-framework-5.0.1.RELEASE/libs/spring-jms-5.0.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dylan/eclipse-workspace/spring/spring-framework-5.0.1.RELEASE/libs/spring-messaging-5.0.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dylan/eclipse-workspace/spring/spring-framework-5.0.1.RELEASE/libs/spring-orm-5.0.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dylan/eclipse-workspace/spring/spring-framework-5.0.1.RELEASE/libs/spring-oxm-5.0.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dylan/eclipse-workspace/spring/spring-framework-5.0.1.RELEASE/libs/spring-test-5.0.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dylan/eclipse-workspace/spring/spring-framework-5.0.1.RELEASE/libs/spring-tx-5.0.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dylan/eclipse-workspace/spring/spring-framework-5.0.1.RELEASE/libs/spring-web-5.0.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dylan/eclipse-workspace/spring/spring-framework-5.0.1.RELEASE/libs/spring-webflux-5.0.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dylan/eclipse-workspace/spring/spring-framework-5.0.1.RELEASE/libs/spring-webmvc-5.0.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dylan/eclipse-workspace/spring/spring-framework-5.0.1.RELEASE/libs/spring-websocket-5.0.1.RELEASE.jar"/>
+	<classpathentry kind="lib" path="C:/Users/Dylan/commons-logging-1.2/commons-logging-1.2.jar"/>
+	<classpathentry kind="output" path="bin"/>
+</classpath>
