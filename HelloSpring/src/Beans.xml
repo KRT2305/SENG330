@@ -5,6 +5,7 @@
    xsi:schemaLocation = "http://www.springframework.org/schema/beans
    http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
 
+<!-- 			HELLO WORLD 			-->
    <bean id = "helloWorld" class = "com.tutorialspoint.HelloWorld">
       <property name = "message" value = "Hello World!"/>
    </bean>
@@ -12,5 +13,19 @@
    <bean id = "secret" class = "com.tutorialspoint.HelloWorld">
    	  <property name = "secret" value = "Where is fancy bread, in the heart or in the head?"/>
    </bean>
+   
+<!-- 			VEHICLE 				-->
 
+	<bean id = "test" class = "WEBAPI.Vehicle">
+		<property name = "type" value = "truck"/>
+		<property name = "license" value = "fg483hu"/>
+		<property name = "status" value = "1"/>
+	</bean>
+	
+	<bean id = "test2" class = "WEBAPI.Vehicle">
+		<property name = "type" value = "Sub-compact"/>
+		<property name = "license" value = "sks29ks"/>
+		<property name = "status" value = "0"/>
+	</bean>
+	
 </beans>
