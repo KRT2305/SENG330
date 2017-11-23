@@ -6,3 +6,8 @@ class Customer(models.Model):
 	phone_number = models.CharField(max_length=200)
 	email = models.CharField(max_length=200)
 	licence = models.CharField(max_length=200)
+
+	def __str__(self):
+		return self.name
+
+
