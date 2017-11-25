@@ -1,6 +1,7 @@
 from django.db import models
 import datetime
 
+
 class Customer(models.Model):
 	name = models.CharField(max_length=200)
 	address = models.CharField(max_length=200)
@@ -40,6 +41,10 @@ class Depot(models.Model):
 	
 	Add a queury so grabbing all vehicles associated with it.
 	'''
+	# to string
+	def __str__(self):
+		output = ''.join(['{}:: {}\n'.format(attr, value) for attr, value in self.__dict__.items()])
+		return output
 	
 
 class Vehicle(models.Model):
@@ -60,6 +65,12 @@ class Vehicle(models.Model):
 
 	def get_status(self):
 		return self.is_available
+	
+	# to string
+	def __str__(self):
+		output = ''.join(['{}:: {}\n'.format(attr, value) for attr, value in self.__dict__.items()])
+		return output
+
 
 class Booking(models.Model):
 	customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
@@ -72,3 +83,10 @@ class Booking(models.Model):
 		self.vehicle = vehicle
 		self.depot = depot
 		self.booking_time = date
+
+	# to string
+	def __str__(self):
+		output = ''.join(['{}:: {}\n'.format(attr, value) for attr, value in self.__dict__.items()])
+		return output
+
+
