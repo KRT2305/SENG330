@@ -25,6 +25,9 @@ class Customer(models.Model):
 
 class Depot(models.Model):
 	address = models.CharField(max_length=200)
+
+	def __init__(self, address):
+		self.address = address
 	
 	'''
 	Might want to reconsider making depot aware of schedule, since we could
