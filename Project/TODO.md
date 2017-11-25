@@ -1,6 +1,6 @@
 # THINGS WE NEED TO DO
 - html in templates
-- add classes to models.py (Dylan plans on finishing this tonight and tomorrow)
+- add classes to models.py (Dylan plans on finishing this tonight(fri) and tomorrow(sat))
 - link classes to server with urls.py (so that it displays)
 - Create Views in views.py
 
