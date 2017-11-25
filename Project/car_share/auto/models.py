@@ -17,13 +17,6 @@ class Customer(models.Model):
 		self.email = email
 		self.licence = licence
 
-	# just playing around with this..
-
-	'''
-	def __iter__(self):
-		for attr, value in self.__dict__.iteritems():
-			yield attr, value
-	'''
 	# to string
 	def __str__(self):
 		output = ''.join(['{}:: {}\n'.format(attr, value) for attr, value in self.__dict__.items()])
@@ -43,8 +36,8 @@ class Depot(models.Model):
 	'''
 	# to string
 	def __str__(self):
-		output = ''.join(['{}:: {}\n'.format(attr, value) for attr, value in self.__dict__.items()])
-		return output
+		return = ''.join(['{}:: {}\n'.format(attr, value) for attr, value in self.__dict__.items()])
+		
 	
 
 class Vehicle(models.Model):
@@ -88,5 +81,20 @@ class Booking(models.Model):
 	def __str__(self):
 		output = ''.join(['{}:: {}\n'.format(attr, value) for attr, value in self.__dict__.items()])
 		return output
+
+'''
+DO WE ACTUALLY NEED A SCHEDULE CLASS??? (I'm thinking not)
+
+Might make more sense to have different queries which fetch
+bookings based on Customer(for the.. customer) or Depot(for the employee)
+
+
+DO WE NEED A SUBSCRIPTION CLASS?? (Possibly)
+
+But what do we want it to do?
+
+We can assume that payment might be done in person by the employees
+as this is not really within the scope of the project.
+'''
 
 
