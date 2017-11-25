@@ -7,6 +7,7 @@
 ## TUTORIALS
 ### TEMPLATES
 - https://docs.djangoproject.com/en/1.11/intro/tutorial03/
+- https://docs.djangoproject.com/en/1.11/intro/tutorial04/
 
 ### MODELS
 - https://docs.djangoproject.com/en/1.11/ref/models/fields/#django.db.models.ForeignKey.on_delete
@@ -14,6 +15,7 @@
 
 ### URLS
 - https://docs.djangoproject.com/en/1.11/intro/tutorial01/
+- https://docs.djangoproject.com/en/1.11/intro/tutorial03/
 
 ### VIEWS
-- (fill)
+- https://docs.djangoproject.com/en/1.11/intro/tutorial03/
