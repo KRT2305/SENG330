@@ -19,3 +19,5 @@
 
 ### VIEWS
 - https://docs.djangoproject.com/en/1.11/intro/tutorial03/
+### DATABASES
+- https://docs.djangoproject.com/en/1.11/topics/db/queries/
