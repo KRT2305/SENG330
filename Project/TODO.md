@@ -1,7 +1,8 @@
 # THINGS WE NEED TO DO
 
 - html in templates
-- add classes to models.py
+- add classes to models.py (Dylan plans on finishing this tonight and tomorrow)
+- link classes to server with urls.py (so that it displays)
 
 ## TUTORIALS
 
