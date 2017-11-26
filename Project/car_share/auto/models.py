@@ -1,14 +1,24 @@
 from django.db import models
+from django.db import connection
 import datetime
 
+#  docs.djangoproject.com/en/1.11/ref/models/instances/#creating-objects
+
+class CustomerManager(models.Manager):
+	def create_customer(self, name, address, phone_number, email, license):
+		customer = self.create(name=name, address=address, phone_number=phone_number, email=email, license=license)
+		return customer
 
 class Customer(models.Model):
 	name = models.CharField(max_length=200)
 	address = models.CharField(max_length=200)
 	phone_number = models.CharField(max_length=200)
 	email = models.CharField(max_length=200)
-	licence = models.CharField(max_length=200)
+	license = models.CharField(max_length=200)
 
+	objects = CustomerManager()
+
+	'''
 	#customer constructor
 	def __init__(self, name, address, phone_number, email,licence):
 		self.name = name
@@ -16,18 +26,26 @@ class Customer(models.Model):
 		self.phone_number = phone_number
 		self.email = email
 		self.licence = licence
-
+	'''
+	
 	# to string
 	def __str__(self):
 		output = ''.join(['{}:: {}\n'.format(attr, value) for attr, value in self.__dict__.items()])
 		return output
 
 
+class DepotManager(models.Manager):
+	def create_depot(self, address):
+		depot = self.create(address=address)
+		return depot
+
 class Depot(models.Model):
 	address = models.CharField(max_length=200)
 
-	def __init__(self, address):
-		self.address = address
+	objects = DepotManager()
+
+	#def __init__(self, address):
+	#	self.address = address
 	
 	'''
 	Might want to reconsider making depot aware of schedule, since we could
@@ -41,20 +59,27 @@ class Depot(models.Model):
 	def __str__(self):
 		return ''.join(['{}:: {}\n'.format(attr, value) for attr, value in self.__dict__.items()])
 		
-	
+class vehicleManager(models.Manager):
+	def create_vehicle(self, depot, available, v_type, license):
+		vehicle = self.create(depot=depot, available=available, v_type=v_type, license=license)
+
+		return vehicle
 
 class Vehicle(models.Model):
 	depot = models.ForeignKey(Depot, on_delete=models.PROTECT)
 	available = models.BooleanField(True)
 	v_type = models.CharField(max_length=200)
 	license = models.CharField(max_length=200)
-	# schedule
 
+	objects = vehicleManager()
+
+	'''
 	def __init__(self, depot, available, v_type, license):
 		self.depot = depot
 		self.available = available
 		self.v_type = v_type
 		self.license = license
+	'''
 
 	def set_status(self, status):
 		self.is_available = status
@@ -67,6 +92,11 @@ class Vehicle(models.Model):
 		output = ''.join(['{}:: {}\n'.format(attr, value) for attr, value in self.__dict__.items()])
 		return output
 
+class BookingManager(models.Manager):
+	def create_booking(self, customer, vehicle, depot, booking_time):
+		booking = self.create(customer=customer, vehicle=vehicle, depot=depot, booking_time=booking_time)
+
+		return booking
 
 class Booking(models.Model):
 	customer = models.ForeignKey(Customer, on_delete=models.CASCADE)
@@ -74,11 +104,7 @@ class Booking(models.Model):
 	depot = models.ForeignKey(Depot, on_delete=models.CASCADE)
 	booking_time = models.DateTimeField('date booked')
 	
-	def __init__(self, customer, vehicle, depot, date):
-		self.customer = customer
-		self.vehicle = vehicle
-		self.depot = depot
-		self.booking_time = date
+	objects = BookingManager()
 
 	# to string
 	def __str__(self):
