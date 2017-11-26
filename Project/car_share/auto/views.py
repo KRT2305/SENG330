@@ -1,7 +1,10 @@
 from django.http import HttpResponse
-from django.shortcuts import render
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login
 from .models import Customer, Depot, Vehicle, Booking
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def index(request):
     customer_list = Customer.objects.order_by('name')
    # output = ', '.join([str(customer) for customer in customer_list])
