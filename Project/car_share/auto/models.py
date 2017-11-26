@@ -39,7 +39,7 @@ class Depot(models.Model):
 	'''
 	# to string
 	def __str__(self):
-		return = ''.join(['{}:: {}\n'.format(attr, value) for attr, value in self.__dict__.items()])
+		return ''.join(['{}:: {}\n'.format(attr, value) for attr, value in self.__dict__.items()])
 		
 	
 
