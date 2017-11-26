@@ -1,11 +1,15 @@
 from django.http import HttpResponse
-
-from .models import Customer
+from django.shortcuts import render
+from .models import Customer, Depot, Vehicle, Booking
 
 def index(request):
     customer_list = Customer.objects.order_by('name')
-    output = ', '.join([str(customer) for customer in customer_list])
-    return HttpResponse(output)
+   # output = ', '.join([str(customer) for customer in customer_list])
+    return render(
+        request,
+        'index.html',
+        context={'customer_list':customer_list},
+    )
 
 def detail(request, customer_id):
     return HttpResponse("You're viewing customer %s" % customer_id)
