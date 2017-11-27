@@ -12,8 +12,7 @@ class Customer(User):
 	objects = CustomerManager()
 
 	class Meta:
-		proxy = True
-		ordering = ('first_name')	
+		proxy = True	
 
 
 class Depot(models.Model):
