@@ -1,10 +1,22 @@
-{% if customer_list %}
-    <ul>
-    {% for customer in customer_list %}
-        <li><a href="auto/{{ customer.id }}/">{{ customer.name  }}</a></li>
-    {% endfor %}
-    </ul>
-{% else %}
-    <p>No customers are available.</p>
-{% endif %}
+{% extends "base_generic.html" %}
+
+<html>
+	<body>
+		<div class = "flex _direction-column container"> 
+			{% block content %}
+
+				{% if customer_list %}
+	    			<ul>
+	    			{% for customer in customer_list %}
+	       				<li><a href="auto/{{ customer.id }}/">{{ customer.name  }}</a></li>
+	   				{% endfor %}
+	    			</ul>
+				{% else %}
+	    			<p>No customers are available.</p>
+				{% endif %}
+
+			{% endblock %}
+		</div>
+	</body>
+</html>
 
