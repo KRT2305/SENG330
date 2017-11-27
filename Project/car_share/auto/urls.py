@@ -6,5 +6,6 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^(?P<customer_id>[0-9]+)/$', views.detail, name='detail'),
     url(r'^(?P<customer_id>[0-9]+)/bookings/$', views.bookings, name='bookings'),
+    url(r'^(?P<customer_id>[0-9]+)/profile/$', views.profile, name='profile'),
 ]
 	
