@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
 
   {% block title %}<title>WhipVic</title>{% endblock %}
@@ -11,10 +12,15 @@
 
   <!-- Add additional CSS in static file -->
   {% load static %}
-  <link rel="stylesheet" href="{% static 'css/styles.css' %}">
+  <link rel="stylesheet" type="text/css" href="{% static 'base/style.css' %}" />
 </head>
 
-<body>
+<body>      
+
+    <div class = "jumbotron text-center"/>
+        <h1>WhipVic</h1>
+          <p>Welcome to <em>WhipVic</em>, your local vehicle booking system.</p>
+      </div>
 
   <div class="container-fluid">
 
