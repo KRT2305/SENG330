@@ -1,16 +1,25 @@
 {% extends "base_generic.html" %}
 
-{% block content %}
-<h1>WhipVic</h1>
-<ul class="sidebar-nav">
-</ul>
+<html>
+	<head>
+  		{% load static %}
+	</head>
 
-  <p>Welcome to <em>WhipVic</em>, your local vehicle booking system.</p>
+	<body>
+		<!-- <ul class="sidebar-nav"></ul> -->
 
-<h2>Dynamic content</h2>
+		<div class = "flex _direction-column container"> 
+			{% block content %}
 
-  <p>Car Share details:</p>
-  <ul>
-    <li><strong>Customers:</strong> {{ customer_list }}</li>
-  </ul>
-{% endblock %}
+			<h2>Home</h2>
+
+	  		<p>Car Share details:</p>
+
+	  		<ul>
+	    		<li><strong>Customers:</strong> {{ customer_list }}</li>
+	  		</ul>
+			{% endblock %}
+		</div>
+	</body>
+
+</html>
