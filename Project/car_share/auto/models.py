@@ -12,7 +12,7 @@ class Customer(User):
 	objects = CustomerManager()
 
 	class Meta:
-		proxy = True	
+		proxy = True
 
 
 class Depot(models.Model):
@@ -21,7 +21,8 @@ class Depot(models.Model):
 	objects = DepotManager()
 
 	def __str__(self):
-		return ''.join(['{}:: {}\n'.format(attr, value) for attr, value in self.__dict__.items()])
+		return self.address
+		# return ''.join(['{}:: {}\n'.format(attr, value) for attr, value in self.__dict__.items()])
 
 
 class Vehicle(models.Model):
@@ -39,7 +40,8 @@ class Vehicle(models.Model):
 		return self.is_available
 	
 	def __str__(self):
-		return ''.join(['{}:: {}\n'.format(attr, value) for attr, value in self.__dict__.items()])
+		return "{}\n{}\n{}".format(self.depot, self.license, self.v_type)
+		# return ''.join(['{}:: {}\n'.format(attr, value) for attr, value in self.__dict__.items()])
 
 
 class Booking(models.Model):
@@ -51,7 +53,8 @@ class Booking(models.Model):
 	objects = BookingManager()
 
 	def __str__(self):
-		return ''.join(['{}:: {}\n'.format(attr, value) for attr, value in self.__dict__.items()])
+		return "{}\n{}\n{}".format(self.customer.username, self.vehicle, self.depot)
+		# return ''.join(['{}:: {}\n'.format(attr, value) for attr, value in self.__dict__.items()])
 
 
 
