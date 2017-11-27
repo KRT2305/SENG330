@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
 from .models import Customer, Depot, Vehicle, Booking
 from django.contrib.auth.decorators import login_required
+from django.http import Http404
 
 @login_required
 def index(request):
@@ -17,11 +18,17 @@ def index(request):
 def detail(request, customer_id):
     return HttpResponse("You're viewing customer %s" % customer_id)
 
-def bookings(request, customer_id):
+'''def bookings(request, customer_id):
     response = "You're looking at the bookings of customer %s."
-    return HttpResponse(response % customer_id)
+    return HttpResponse(response % customer_id) '''
 
-
+def bookings(request, customer_id):
+    customer_list = Customer.objects.order_by('name')
+    return render(
+        request,
+        'bookings.html',
+        context={'customer_list': customer_list},
+    )
 
 
 

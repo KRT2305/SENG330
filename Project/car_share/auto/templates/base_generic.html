@@ -23,7 +23,8 @@
       {% block sidebar %}
       <ul class="sidebar-nav">
           <li><a href="{% url 'index' %}">Home</a></li>
-          <li><a href="">FAQ</a></li>
+          <li><a href="{% url 'bookings' customer_id=user.id %}">Manage Bookings</a></li>
+          <li><a href="">My profile</a></li>
           <a href="{% url 'logout' %}">Log out</a>
       </ul>
      {% endblock %}
