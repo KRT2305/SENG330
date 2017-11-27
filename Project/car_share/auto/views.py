@@ -7,7 +7,7 @@ from django.http import Http404
 
 @login_required
 def index(request):
-    customer_list = Customer.objects.order_by('name')
+    customer_list = Customer.objects.order_by('last_name')
    # output = ', '.join([str(customer) for customer in customer_list])
     return render(
         request,
@@ -23,11 +23,11 @@ def detail(request, customer_id):
     return HttpResponse(response % customer_id) '''
 
 def bookings(request, customer_id):
-    customer_list = Customer.objects.order_by('name')
+    booking_list = Booking.objects.bookings(Customer.objects.get(id=customer_id))
     return render(
         request,
         'bookings.html',
-        context={'customer_list': customer_list},
+        context={'booking_list': booking_list},
     )
 
 
