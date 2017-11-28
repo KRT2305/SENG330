@@ -1,5 +1,6 @@
 exclude:
 - /Project/car_share/auto/migrations/.*
-component_depth: 1
+- /Project/car_share/car_share/settings.py
+component_depth: 2
 languages:
 - python
