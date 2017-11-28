@@ -44,7 +44,7 @@ class BookingManager(models.Manager):
 		if depot:
 			return self.get_queryset().bookings(depot=depot)
 		return self.get_queryset().bookings()
-
+'''
 class ProfileManager(models.Manager):
 	@receiver(post_save, sender=User)
 	def create_profile(sender, instance, created, *args, **kwargs):
@@ -57,3 +57,5 @@ class ProfileManager(models.Manager):
 	@receiver(post_save, sender=User)
 	def save_user_profile(sender, instance, **kwargs):
 		instance.profile.save()
+'''
+

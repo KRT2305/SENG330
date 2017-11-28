@@ -81,7 +81,7 @@ class Booking(models.Model):
 	vehicle = models.ForeignKey(Vehicle,on_delete=models.CASCADE, related_name='vehicle')
 	depot = models.ForeignKey(Depot, on_delete=models.CASCADE, related_name='depot')
 	booking_time = models.DateTimeField(null = True)
-	payment_status = models.CharField(max_length=20,choices = PAYMENT_STATUS)
+#	payment_status = models.CharField(max_length=20,choices = PAYMENT_STATUS)
     
 	objects = BookingManager()
 
@@ -89,12 +89,11 @@ class Booking(models.Model):
 		return self.customer.username+" "+self.vehicle+" " +self.depot
 
 
-
+'''
 class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
 	email_confirmed = models.BooleanField(default=False)
 
 	objects = ProfileManager()
-
-	
+'''
 
