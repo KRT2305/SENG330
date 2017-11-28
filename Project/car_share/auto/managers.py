@@ -18,6 +18,12 @@ class CustomerManager(models.Manager):
 class DepotManager(models.Manager):
 	def create_depot(self, address):
 		return self.create(address=address)
+	
+	def get_queryset(self):
+		return DepotQuerySet(self.model, using=self._db)
+
+	def depots(self):
+		return self.get_queryset().depots()
 
 
 class VehicleManager(models.Manager):
