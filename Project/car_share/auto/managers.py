@@ -58,8 +58,8 @@ class ProfileManager(models.Manager):
 		# ignore if this is an existing User
 		if not created:
 			return
-	Profile.objects.create(user=instance)
-	post_save.connect(create_profile, sender=User)
+		Profile.objects.create(user=instance)
+		post_save.connect(create_profile, sender=User)
 	
 	@receiver(post_save, sender=User)
 	def save_user_profile(sender, instance, **kwargs):
