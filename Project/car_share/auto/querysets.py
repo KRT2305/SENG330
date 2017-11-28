@@ -1,6 +1,11 @@
 from django.db import models
 
 
+class DepotQuerySet(models.QuerySet):
+	def depots(self):
+		return self
+
+
 class VehicleQuerySet(models.QuerySet):
 	def vehicles(self, depot=None, v_type=None):
 		if not depot:
