@@ -8,6 +8,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import UserManager
+from .models import Profile
 
 class CustomerManager(models.Manager):
 	def create_customer(self, username, first_name, last_name, email, password):
