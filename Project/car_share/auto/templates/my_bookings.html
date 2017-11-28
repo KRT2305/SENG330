@@ -5,16 +5,38 @@
 		<div class = "flex _direction-column container"> 
 			{% block content %}
 
-				{% if booking_list %}
-	    			<ul>
-	    			{% for booking in booking_list %}
-	       				<li><a href="auto/{{ customer.id }}/">{{ customer.name  }}</a></li>
-	   				{% endfor %}
-	    			</ul>
-				{% else %}
-	    			<p>No bookings are available.</p>
-				{% endif %}
+			<h1>My Bookings:</h1>
 
+<!-- 			<div class = "container-bookings">
+		    	{% for booking in booking_list %}
+		    		<ol> Customer: {{ booking.customer }} <br> Vehicle: {{ booking.vehicle }} <br> 
+		    			Depot: {{ booking.depot }} <br> Booking Time: {{ booking.booking_time }} </ol>
+		    	{% endfor %}
+		    </div> -->
+
+		    <table class="table">
+			  <thead>
+			    <tr>
+			      <th scope="col">#</th>
+			      <th scope="col">Customer</th>
+			      <th scope="col">Vehicle</th>
+			      <th scope="col">Depot</th>
+			      <th scope="col">Booking Time</th>
+			    </tr>
+			  </thead>
+
+			{% for booking in booking_list %}
+				  <tbody>
+				    <tr>
+				      <th scope="row">1</th>
+				      <td>{{ booking.customer }}</td>
+				      <td>{{ booking.vehicle }}</td>
+				      <td>{{ booking.depot }}</td>
+				      <td>{{ booking.booking_time }}</td>
+				    </tr>
+				  </tbody>
+				</table>
+			{% endfor %}
 			{% endblock %}
 		</div>
 	</body>

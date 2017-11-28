@@ -8,11 +8,12 @@ from django.http import Http404
 @login_required
 def index(request):
     customer_list = Customer.objects.order_by('last_name')
-   # output = ', '.join([str(customer) for customer in customer_list])
+    booking_list = Booking.objects.bookings();
+    # output = ', '.join([str(customer) for customer in customer_list])
     return render(
         request,
         'index.html',
-        context={'customer_list':customer_list},
+        context={'customer_list': customer_list, 'booking_list': booking_list},
     )
 
 @login_required
@@ -32,6 +33,7 @@ def bookings(request, customer_id):
         context={'booking_list': booking_list},
     )
 
+@login_required
 def profile(request, customer_id):
     current_customer = Booking.objects.bookings(Customer.objects.get(id=customer_id))
     return render(
@@ -40,6 +42,7 @@ def profile(request, customer_id):
         context={'current_customer': current_customer},
     )
 
+@login_required
 def create_booking(request, customer_id):
     current_customer = Booking.objects.bookings(Customer.objects.get(id=customer_id))
     return render(
@@ -48,8 +51,9 @@ def create_booking(request, customer_id):
         context={'current_customer': current_customer},
     )
 
+@login_required
 def my_bookings(request, customer_id):
-    booking_list = Booking.objects.bookings(Customer.objects.get(id=customer_id))
+    booking_list = Booking.objects.bookings(Customer.objects.get(id=customer_id));
     return render(
         request,
         'my_bookings.html',
