@@ -31,7 +31,9 @@ TAXI_TYPES =(
 PAYMENT_STATUS =(
         ('DONE', 'Successful'),
         ('PENDING', 'Later'),
-	)
+)
+
+
 class Customer(User):
 	objects = CustomerManager()
 
@@ -40,16 +42,17 @@ class Customer(User):
 
 
 class Depot(models.Model):
-    address = models.CharField(max_length=200)
-    name = models.CharField(max_length=200,default=' ')
-    city = models.CharField(max_length=200,default=' ')
-    state = models.CharField(max_length= 200,default=' ')
-    objects = DepotManager()
+	address = models.CharField(max_length=200)
+	name = models.CharField(max_length=200,default=' ')
+	city = models.CharField(max_length=200,default=' ')
+	state = models.CharField(max_length= 200,default=' ')
+	objects = DepotManager()
 
-    def __str__(self):
-        return self.name+"-"+self.city
-    def get_location(self):
-        return self.name+" "+self.city+" "+self.state
+	def __str__(self):
+		return self.name+"-"+self.city
+	
+	def get_location(self):
+		return self.name+" "+self.city+" "+self.state
 		# return ''.join(['{}:: {}\n'.format(attr, value) for attr, value in self.__dict__.items()])
 
 #@python_2_unicode_compatibile
@@ -74,32 +77,24 @@ class Vehicle(models.Model):
 
 
 class Booking(models.Model):
-	#customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='customer')
-    id = models.AutoField(primary_key=True)
-    customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='customer')
-    vehicle = models.ForeignKey(Vehicle,on_delete=models.CASCADE, related_name='vehicle')
+	customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='customer')
+	vehicle = models.ForeignKey(Vehicle,on_delete=models.CASCADE, related_name='vehicle')
+	depot = models.ForeignKey(Depot, on_delete=models.CASCADE, related_name='depot')
+	booking_time = models.DateTimeField(null = True)
+	payment_status = models.CharField(max_length=20,choices = PAYMENT_STATUS)
     
-    depot = models.ForeignKey(Depot, on_delete=models.CASCADE, related_name='depot')
-    
-    booking_time = models.DateTimeField(null = True)
-    
-    payment_status = models.CharField(max_length=20,choices = PAYMENT_STATUS)
-    
-    objects = BookingManager()
+	objects = BookingManager()
 
-    def __str__(self):
-        return self.customer.username+" "+self.vehicle+" " +self.depot
+	def __str__(self):
+		return self.customer.username+" "+self.vehicle+" " +self.depot
 
 
 
 class Profile(models.Model):
-    user = models.OneToOneField(User, on_delete=models.CASCADE)
-    email_confirmed = models.BooleanField(default=False)
-    
-    
-    objects = ProfileManager()
+	user = models.OneToOneField(User, on_delete=models.CASCADE)
+	email_confirmed = models.BooleanField(default=False)
+
+	objects = ProfileManager()
 
 	
-
-
 
