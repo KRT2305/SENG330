@@ -8,7 +8,7 @@ from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import UserManager
-from .models import Profile
+from .models import *
 
 class CustomerManager(models.Manager):
 	def create_customer(self, username, first_name, last_name, email, password):
@@ -51,7 +51,7 @@ class BookingManager(models.Manager):
 		if depot:
 			return self.get_queryset().bookings(depot=depot)
 		return self.get_queryset().bookings()
-'''
+
 class ProfileManager(models.Manager):
 	@receiver(post_save, sender=User)
 	def create_profile(sender, instance, created, *args, **kwargs):
@@ -64,5 +64,4 @@ class ProfileManager(models.Manager):
 	@receiver(post_save, sender=User)
 	def save_user_profile(sender, instance, **kwargs):
 		instance.profile.save()
-'''
 
