@@ -5,8 +5,8 @@
 		<div class = "flex _direction-column container"> 
 			{% block content %}
 				<h1>Manage Bookings</h1>
-				<p><a href="{% url 'create_booking' customer_id=user.id %}">Create Booking</a></p>
-				<p><a href="{% url 'my_bookings' customer_id=user.id %}">My Bookings</a></p>
+				<h3><a href="{% url 'create_booking' customer_id=user.id %}">Create Booking</a></h3>
+				<h3><a href="{% url 'my_bookings' customer_id=user.id %}">My Bookings</a></h3>
 			{% endblock %}
 		</div>
 	</body>

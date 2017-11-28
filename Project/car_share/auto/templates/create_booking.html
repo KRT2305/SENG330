@@ -5,23 +5,40 @@
 		<div class = "flex _direction-column container"> 
 			{% block content %}
 			<h1>Create Booking</h1>
-			  <form method="post">
-    			{% csrf_token %}
-			    {% for field in form %}
-			      	<p>
-				        {{ field.label_tag }}<br>
-				        {{ field }}
-				        {% if field.help_text %}
-				          	<small style="color: blue">{{ field.help_text }}</small>
-				        {% endif %}
-				        {% for error in field.errors %}
-				          	<p style="color: red">{{ error }}</p>
-				        {% endfor %}
-			      	</p>
-			    {% endfor %}
-			    <button type="submit">Sign up</button>
-			  </form>   	
 
+			<p>Depots: {{depot_list}} </p>
+
+			<div class = "container-content">
+				<form>
+				  <div class="form-group">
+				    <label for="exampleFormControlInput1">Email address</label>
+				    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleFormControlSelect1">Select Depot</label>
+				    <select class="form-control" id="exampleFormControlSelect1">
+				    	{% for depot in depot_list %}
+				      		<option>{{ depot.address }}</option>
+				      	{% endfor %}
+				    </select>
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleFormControlSelect2">Example multiple select</label>
+				    <select multiple class="form-control" id="exampleFormControlSelect2">
+				      <option>1</option>
+				      <option>2</option>
+				      <option>3</option>
+				      <option>4</option>
+				      <option>5</option>
+				    </select>
+				  </div>
+				  <div class="form-group">
+				    <label for="exampleFormControlTextarea1">Example textarea</label>
+				    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+				  </div>
+				</form>
+			</div>
+			</div>
 			{% endblock %}
 		</div>
 	</body>
