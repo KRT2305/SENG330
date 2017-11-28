@@ -89,8 +89,15 @@ class Booking(models.Model):
 
     def __str__(self):
         return self.customer.username+" "+self.vehicle+" " +self.depot
-	
+
+
+
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    email_confirmed = models.BooleanField(default=False)
     
+    
+    objects = ProfileManager()
 
 	
 
