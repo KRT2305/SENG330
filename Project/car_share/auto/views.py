@@ -40,5 +40,21 @@ def profile(request, customer_id):
         context={'current_customer': current_customer},
     )
 
+def create_booking(request, customer_id):
+    current_customer = Booking.objects.bookings(Customer.objects.get(id=customer_id))
+    return render(
+        request,
+        'create_booking.html',
+        context={'current_customer': current_customer},
+    )
+
+def my_bookings(request, customer_id):
+    booking_list = Booking.objects.bookings(Customer.objects.get(id=customer_id))
+    return render(
+        request,
+        'my_bookings.html',
+        context={'booking_list': booking_list},
+    )
+
 
 
