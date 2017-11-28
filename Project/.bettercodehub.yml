@@ -1,0 +1,5 @@
+exclude:
+- /Project/car_share/auto/migrations/.*
+component_depth: 1
+languages:
+- python
