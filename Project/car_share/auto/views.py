@@ -45,20 +45,20 @@ def profile(request, customer_id):
 @login_required
 def create_booking(request, customer_id):
     current_customer = Customer.objects.get(id=customer_id)
+    depot_list = Depot.objects.depots()
     return render(
         request,
         'create_booking.html',
-        context={'current_customer': current_customer},
+        context={'current_customer': current_customer, 'depot_list': depot_list},
     )
 
 @login_required
 def my_bookings(request, customer_id):
     booking_list = Booking.objects.bookings(Customer.objects.get(id=customer_id))
-    depot_list = Depot.objects.all()
     return render(
         request,
         'my_bookings.html',
-        context={'booking_list': booking_list, 'depot_list': depot_list},
+        context={'booking_list': booking_list,},
     )
 
 
