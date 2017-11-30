@@ -1,8 +1,6 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
-from .models import *
-from .managers import *
 #from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import Http404
 from django.contrib.auth.decorators import * 
@@ -20,6 +18,9 @@ from django.template.loader import render_to_string
 from .tokens import account_activation_token
 
 from django.core.mail import send_mail
+
+from .models import *
+from .managers import *
 
 EMAIL_HOST_USER = 'whipvic@gmail.com'
 
