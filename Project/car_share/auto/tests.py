@@ -33,15 +33,13 @@ def make_booking():
 	print("customer's hours after booking: {}".format(c.email))
 	
 	
-def delete_booking_all():
-	c = Customer.objects.get(id=1)
+def delete_booking():
+	c = Customer.objects.get(id=4)
 	
 	booking_list = Booking.objects.bookings(c)
 	
 	print("customer's hours before deletion: {}".format(c.email))
-	for booking in booking_list:
-		print(booking)
-		Booking.objects.delete_booking(c, booking)
-		break
+	
+	Booking.objects.delete_booking(c, booking[1])
 	
 	print("customer's hours after deletion: {}".format(c.email))
