@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/1.11/ref/settings/
 
 import os
 
+
+
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -27,6 +29,14 @@ DEBUG = True
 
 ALLOWED_HOSTS = ['127.0.0.1','localhost']
 # Application definition
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'whipvic@gmail.com'
+EMAIL_HOST_PASSWORD = 'getthemoney'
+EMAIL_PORT = 587
+SERVER_EMAIL = 'whipvic@gmail.com'
+
 
 INSTALLED_APPS = [
     'auto.apps.AutoConfig',
@@ -36,6 +46,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'car_share'
+    
 ]
 
 MIDDLEWARE = [
@@ -48,6 +60,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.auth.middleware.RemoteUserMiddleware',
+    
 ]
 
 ROOT_URLCONF = 'car_share.urls'
@@ -69,7 +82,7 @@ TEMPLATES = [
 ]
 
 WSGI_APPLICATION = 'car_share.wsgi.application'
-
+ACCOUNT_SIGNUP_FORM_CLASS = 'car_share.forms.RegistrationForm'
 
 # Database
 # https://docs.djangoproject.com/en/1.11/ref/settings/#databases
@@ -121,9 +134,3 @@ USE_TZ = True
 STATIC_URL = '/static/'
 # Redirect to home URL after login (Default redirects to /accounts/profile/)
 LOGIN_REDIRECT_URL = '/auto'
-
-STATICFILES_FINDERS = (
-'django.contrib.staticfiles.finders.FileSystemFinder',
-'django.contrib.staticfiles.finders.AppDirectoriesFinder',
-'django.contrib.staticfiles.finders.DefaultStorageFinder',
-)
