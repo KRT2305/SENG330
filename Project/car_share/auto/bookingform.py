@@ -25,35 +25,23 @@ class CreateBookingForm(forms.ModelForm):
 	start_time = forms.DateTimeField(widget=forms.DateTimeInput)
 	end_time = forms.DateTimeField(widget=forms.DateTimeInput)
 
-<<<<<<< HEAD
-=======
 	# vehicle = Vehicle.objects.vehicles(depot, vehicle_type)
-	# bookings = Booking.objects.bookings(depot)
-
+	# v = 0
 	# for item in vehicle:
-	# 	b_start = item.start_time - datetime.timedelta(days=2)
-	# 	b_end = item.end_time + datetime.timedelta(days=2)
-
-
->>>>>>> 758300a5baaddc0cdab67619cec664b5e149abdf
-
-	vehicle = Vehicle.objects.vehicles(depot, vehicle_type)
-	v = 0
-	for item in vehicle:
-		bookings = Booking.objects.bookings(depot=depot, vehicle=item)
-		if not bookings:
-			v = item
-			break
-		for booking in bookings:
-			b_start = booking.start_time - datetime.timedelta(days=2)
-			b_end = booking.end_time + datetime.timedelta(days=2)
+	# 	bookings = Booking.objects.bookings(depot=depot, vehicle=item)
+	# 	if not bookings:
+	# 		v = item
+	# 		break
+	# 	for booking in bookings:
+	# 		b_start = booking.start_time - datetime.timedelta(days=2)
+	# 		b_end = booking.end_time + datetime.timedelta(days=2)
 			
-			if start_time > b_end or end_time < b_start:
-				v = item
-				break
+	# 		if start_time > b_end or end_time < b_start:
+	# 			v = item
+	# 			break
 	
-	if not v:
-		print("error, no vehicles of that type available")
+	# if not v:
+	# 	print("error, no vehicles of that type available")
 	
 	
 	
