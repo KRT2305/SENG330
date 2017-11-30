@@ -23,7 +23,7 @@ class CreateBookingForm(forms.ModelForm):
 	depot_list = Depot.objects.depots()
 	vehicle_list = TAXI_TYPES
 
-	depot = forms.ChoiceField(choices=[(depot.address, depot.address) for depot in depot_list])
+	depot = forms.ChoiceField(choices=[(depot, depot) for depot in depot_list])
 	vehicle_type = forms.ChoiceField(choices=[x for x in vehicle_list])
 	start_date = forms.DateField(widget=forms.SelectDateWidget())
 	end_date = forms.DateField(widget=forms.SelectDateWidget())
