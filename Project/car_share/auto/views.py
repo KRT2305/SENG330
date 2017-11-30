@@ -7,7 +7,6 @@ from django.contrib.auth.decorators import *
 from .forms import RegistrationForm
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
-from django import forms
 
 from django.contrib.sites.shortcuts import *
 from django.utils.encoding import *
@@ -164,9 +163,4 @@ def activate(request, uidb64, token):
 
 '''def account_activated(request):
     return render(request, 'account_activated')'''
-
-class UserForm(forms.ModelForm):
-    class Meta:
-        mode = User
-        fields = ['first_name', 'last_name', 'email']
 
