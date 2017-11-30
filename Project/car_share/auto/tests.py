@@ -29,7 +29,9 @@ def delete_booking_all():
 	booking_list = Booking.objects.bookings(c)
 	
 	print("customer's hours before deletion: {}".format(c.email))
-
-	Booking.objects.delete_booking(c, booking_list[0])
+	for booking in booking_list:
+		print(booking)
+		Booking.objects.delete_booking(c, booking)
+		break
 	
 	print("customer's hours after deletion: {}".format(c.email))
