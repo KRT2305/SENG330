@@ -56,10 +56,10 @@ class Depot(models.Model):
 	objects = DepotManager()
 
 	def __str__(self):
-		return self.name+"-"+self.city
+		return self.address+"-"+self.city
 	
 	def get_location(self):
-		return self.name+" "+self.city+" "+self.state
+		return self.address+" "+self.city+" "+self.state
 		# return ''.join(['{}:: {}\n'.format(attr, value) for attr, value in self.__dict__.items()])
 
 #@python_2_unicode_compatibile
@@ -92,8 +92,8 @@ class Booking(models.Model):
     
 	objects = BookingManager()
 
-	def __str__(self):
-		return self.customer.username+" "+self.vehicle+" " +self.depot
+	# def __str__(self):
+	# 	return self.customer.username+" "+self.vehicle+" " +self.depot
 
 '''class ProfileManager(models.Manager):
 	@receiver(post_save, sender=User)

@@ -64,10 +64,11 @@ def profile(request, customer_id):
 def create_booking(request, customer_id):
     current_customer = Customer.objects.get(id=customer_id)
     depot_list = Depot.objects.depots()
+    vehicle_list = Vehicle.objects.vehicles()
     return render(
         request,
         'create_booking.html',
-        context={'current_customer': current_customer, 'depot_list': depot_list},
+        context={'current_customer': current_customer, 'depot_list': depot_list, 'vehicle_list': vehicle_list}
     )
 
 @login_required
