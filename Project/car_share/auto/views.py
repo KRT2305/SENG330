@@ -5,6 +5,7 @@ from django.contrib.auth import authenticate, login
 from django.http import Http404
 from django.contrib.auth.decorators import * 
 from .forms import RegistrationForm
+from .bookingform import CreateBookingForm
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 
@@ -67,14 +68,14 @@ def profile(request, customer_id):
 @login_required
 def create_booking(request, customer_id):
     is_user(request, customer_id)
-    current_customer = Customer.objects.get(id=customer_id)
-    depot_list = Depot.objects.depots()
-    vehicle_list = Vehicle.objects.vehicles()
-    return render(
-        request,
-        'create_booking.html',
-        context={'current_customer': current_customer, 'depot_list': depot_list, 'vehicle_list': vehicle_list}
-    )
+    if request.method == "GET":
+        form = CreateBookingForm(request.POST)
+        if form.is_valid():
+            return rendor(request, 'booking_created.html')
+        
+    else:
+        form = CreateBookingForm()
+    return render(request, 'create_booking.html', {'form':form})
 
 @login_required
 def my_bookings(request, customer_id):

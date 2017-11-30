@@ -5,67 +5,10 @@
 		<div class = "flex _direction-column container"> 
 			{% block content %}
 			<h1>Create Booking</h1>
-
-			<div class = "container-content">
-				<form>
-<!-- 				  <div class="form-group">
-				    <label for="exampleFormControlInput1">Email address</label>
-				    <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
-				  </div> -->
-				  <div class="form-group">
-				    <label for="exampleFormControlSelect1">Select Depot</label>
-				    <select class="form-control" id="exampleFormControlSelect1">
-				    	{% for depot in depot_list %}
-				      		<option>{{ depot.address }}</option>
-				      	{% endfor %}
-				    </select>
-				  </div>
-
-				  <div class="form-group">
-				    <label for="exampleFormControlSelect1">Select Vehicle Type</label>
-				    <select class="form-control" id="exampleFormControlSelect1">
-				    	{% for vehicle in vehicle_list %}
-				      		<option>{{ vehicle.v_type }}</option>
-				      	{% endfor %}
-				    </select>
-				  </div>
-
-				  <label>Select Date And Time</label>
-				  <div style="overflow:hidden;">
-					    <div class="form-group">
-					        <div class="row">
-					            <div class="col-md-8">
-					                <div id="datetimepicker12"></div>
-					            </div>
-					        </div>
-					    </div>
-					    <script type="text/javascript">
-					        $(function () {
-					            $('#datetimepicker12').datetimepicker({
-					                inline: true,
-					                sideBySide: true
-					            });
-					        });
-					    </script>
-					</div>
-
-
-				  <div class="form-group">
-				    <label for="exampleFormControlSelect2">Example multiple select</label>
-				    <select multiple class="form-control" id="exampleFormControlSelect2">
-				      <option>1</option>
-				      <option>2</option>
-				      <option>3</option>
-				      <option>4</option>
-				      <option>5</option>
-				    </select>
-				  </div>
-				  <div class="form-group">
-				    <label for="exampleFormControlTextarea1">Example textarea</label>
-				    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
-				  </div>
-				</form>
-			</div>
+  				<form method="post">
+    				{% csrf_token %}
+    				{{ form }}
+    			</form>
 			</div>
 			{% endblock %}
 		</div>
