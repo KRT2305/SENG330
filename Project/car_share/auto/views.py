@@ -76,7 +76,7 @@ def create_booking(request, customer_id):
         if form.is_valid():
             depot = form.cleaned_data['depot']
             vehicle_type = form.cleaned_data['vehicle_type']
-            start_date = form.cleaned_data['start_date']
+            start_time = form.cleaned_data['start_time']
             end_time = form.cleaned_data['end_time']
 
             vehicle = Vehicle.objects.vehicles(depot, vehicle_type)
@@ -116,7 +116,12 @@ def my_bookings(request, customer_id):
         'my_bookings.html',
         context={'booking_list': booking_list,},
     )
-
+'''
+@login_required
+def delete_bookings(request, customer_id):
+    if_user(request, customer_id)
+    booking_list = Booking.objects.bookings(Customer.objects.get(id=customer_id))
+'''
 
 @csrf_exempt
 def signup(request):
