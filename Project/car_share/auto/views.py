@@ -74,12 +74,9 @@ def create_booking(request, customer_id):
         
         form = CreateBookingForm(request.POST)
         if form.is_valid():
-<<<<<<< HEAD
+
             #vehicle = Vehicle.objects.vehicles(form.depot, 
             return rendor(request, 'booking_created.html')
-=======
-            return render(request, 'booking_created.html', {'form':form})
->>>>>>> cc95ebacb2248e3c437ab8043b26c341f8101077
         
     else:
         form = CreateBookingForm()
