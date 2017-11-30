@@ -12,7 +12,6 @@
 			    <table class="table">
 				  <thead>
 				    <tr>
-				      <th scope="col">#</th>
 				      <th scope="col">Customer</th>
 				      <th scope="col">Vehicle</th>
 				      <th scope="col">Depot</th>
@@ -23,15 +22,14 @@
 				{% for booking in booking_list %}
 					  <tbody>
 					    <tr>
-					      <th scope="row">1</th>
 					      <td>{{ booking.customer }}</td>
 					      <td>{{ booking.vehicle }}</td>
 					      <td>{{ booking.depot }}</td>
 					      <td>{{ booking.booking_time }}</td>
 					    </tr>
+					  {% endfor %}
 					  </tbody>
 					</table>
-				{% endfor %}
 			</div>
 			{% endblock %}
 		</div>
