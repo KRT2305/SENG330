@@ -25,8 +25,8 @@ class CreateBookingForm(forms.ModelForm):
 	start_time = forms.DateTimeField(widget=forms.DateTimeInput)
 	end_time = forms.DateTimeField(widget=forms.DateTimeInput)
 
-	vehicle = Vehicle.objects.vehicles(depot, vehicle_type)
-	bookings = Booking.objects.bookings(depot)
+	# vehicle = Vehicle.objects.vehicles(depot, vehicle_type)
+	# bookings = Booking.objects.bookings(depot)
 
 	# for item in vehicle:
 	# 	b_start = item.start_time - datetime.timedelta(days=2)
