@@ -19,3 +19,5 @@ PAYMENT_STATUS =(
         ('DONE', 'Successful'),
         ('PENDING', 'Later'),
 )
+
+EMAIL_HOST_USER = 'whipvic@gmail.com'
