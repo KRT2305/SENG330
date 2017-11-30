@@ -11,11 +11,13 @@ from .globals import TAXI_TYPES
 
 import datetime
 
+YEAR_CHOICES = ('1980', '1981', '1982')
+
 class CreateBookingForm(forms.ModelForm):
 
 	class Meta:
 		model = Booking
-		fields = ('depot', 'vehicle_type', 'start_date', 'end_time')
+		fields = ('depot', 'vehicle_type', 'start_date', 'end_date')
 		widgets = { 'start_date': forms.DateTimeInput(attrs={'class':'datetime-input'})}
 
 	depot_list = Depot.objects.depots()
@@ -23,8 +25,8 @@ class CreateBookingForm(forms.ModelForm):
 
 	depot = forms.ChoiceField(choices=[(depot.address, depot.address) for depot in depot_list])
 	vehicle_type = forms.ChoiceField(choices=[x for x in vehicle_list])
-	start_date = forms.DateField(widget=forms.DateInput(attrs={'class':'datepicker'}))
-	end_date = forms.DateTimeField(widget=forms.DateTimeInput)
+	start_date = forms.DateField(widget=forms.SelectDateWidget())
+	end_date = forms.DateField(widget=forms.SelectDateWidget())
 
 
 	# vehicle = Vehicle.objects.vehicles(depot, vehicle_type)
