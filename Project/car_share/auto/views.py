@@ -20,6 +20,7 @@ from .tokens import account_activation_token
 
 from django.core.mail import send_mail
 
+from .bookingform import *
 from .models import *
 from .managers import *
 from django.contrib.auth.hashers import *
@@ -69,9 +70,11 @@ def profile(request, customer_id):
 @login_required
 def create_booking(request, customer_id):
     is_user(request, customer_id)
-    if request.method == "GET":
+    if request.method == "POST":
+        
         form = CreateBookingForm(request.POST)
         if form.is_valid():
+            #vehicle = Vehicle.objects.vehicles(form.depot, 
             return rendor(request, 'booking_created.html')
         
     else:
