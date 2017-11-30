@@ -67,5 +67,5 @@ class Booking(models.Model):
 	objects = BookingManager()
 
 	def __str__(self):
-		return "{}\n{}\n{}".format(self.customer.username, self.vehicle.license, self.depot.name)
+		return "{}\n{}\n{}\n{}\n{}".format(self.customer.username, self.vehicle.license, self.depot.name, self.start_time, self.end_time)
 
