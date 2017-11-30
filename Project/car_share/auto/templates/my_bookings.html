@@ -15,7 +15,8 @@
 				      <th scope="col">Customer</th>
 				      <th scope="col">Vehicle</th>
 				      <th scope="col">Depot</th>
-				      <th scope="col">Booking Time</th>
+				      <th scope="col">Booking Start Time</th>
+						<th scope="col">Booking End Time</th>
 				    </tr>
 				  </thead>
 
@@ -25,7 +26,8 @@
 					      <td>{{ booking.customer }}</td>
 					      <td>{{ booking.vehicle }}</td>
 					      <td>{{ booking.depot }}</td>
-					      <td>{{ booking.booking_time }}</td>
+					      <td>{{ booking.start_time }}</td>
+							<td>{{ booking.end_time }}</td>
 					    </tr>
 					  {% endfor %}
 					  </tbody>
