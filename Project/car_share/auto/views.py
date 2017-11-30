@@ -22,8 +22,9 @@ from django.core.mail import send_mail
 
 from .models import *
 from .managers import *
-
+from django.contrib.auth.hashers import *
 EMAIL_HOST_USER = 'whipvic@gmail.com'
+
 
 def is_user(request, customer_id):
     current_customer = Customer.objects.get(id=customer_id)
