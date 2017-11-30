@@ -116,10 +116,15 @@ def signup(request):
         if form.is_valid():
             #user = form.instance
             #user.is_active = False
-            user = Customer.objects.create_customer(form.cleaned_data['username'], form.cleaned_data['first_name'], form.cleaned_data['last_name'], form.cleaned_data['email'], form.cleaned_data['password1'])
-            #user.save()
+            password = form.cleaned_data['password1']
+            hashed_password = make_password(password, None, 'md5')
+            user = Customer.objects.create_customer(form.cleaned_data['email'], form.cleaned_data['first_name'], form.cleaned_data['last_name'], form.cleaned_data['email'], hashed_password)
+            user.save()
+            user.is_active = False
+            
+            #user.set_password(varhash)
             current_site = get_current_site(request)
-            subject = 'Activate Your car_share Account'
+            subject = 'Activate Your CarShare Account'
             raw_password = form.cleaned_data.get('password1')
             message = render_to_string('account_activation_email.html', {
                 'user': user,
@@ -158,8 +163,11 @@ def activate(request, uidb64, token):
 
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
+        '''clearPassNoHash = 
+        varhash = make_password(clearPassNoHash, None, 'md5')
+        user.set_password(varhash)'''
         #user.email_confirmed = True
-        #user.save()
+        user.save()
         #login(request, user)
         #return HttpResponse('Thank you for your email confirmation. This is your account.')
         #return redirect(request,'account_activated')
