@@ -95,7 +95,7 @@ class Booking(models.Model):
 	def __str__(self):
 		return self.customer.username+" "+self.vehicle+" " +self.depot
 
-class ProfileManager(models.Manager):
+'''class ProfileManager(models.Manager):
 	@receiver(post_save, sender=User)
 	def create_profile(sender, instance, created, *args, **kwargs):
 	    # ignore if this is an existing User
@@ -114,5 +114,5 @@ class Profile(models.Model):
 	email_confirmed = models.BooleanField(default=False)
 
 	objects = ProfileManager()
-
+'''
 
