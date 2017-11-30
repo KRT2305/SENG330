@@ -3,19 +3,25 @@ from .models import Customer, Vehicle, Depot, Booking
 
 import datetime
 
-def create_user():
+def make_user():
 	c = Customer.objects.create_customer('testemail@email.com', 'test', 'account', '100', 'password')
 	c.save()
 	print(c.id)
 	
-#def create_vehicle():
-	
+def make_depot():
+	d = Depot.objects.create_depot('1520Pear', 'Pear', 'vic', 'BC')
+	d.save()
+
+def make_vehicle():
+	d = Depot.objects.get(id=3)
+	v = Vehicle.objects.create_vehicle(d, True, 'truck', 'K0SA21H')
+	v.save()
 
 def make_booking():
-	c = Customer.objects.get(id=2)
+	c = Customer.objects.get(id=4)
 	c.email = "1000"
-	d = Depot.objects.get(id=1)
-	v = Vehicle.objects.get(id=1)
+	d = Depot.objects.get(id=4)
+	v = Vehicle.objects.get(id=3)
 	now = datetime.datetime.now()
 	tom = now + datetime.timedelta(days=2)
 	
