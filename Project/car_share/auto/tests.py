@@ -18,10 +18,10 @@ def make_vehicle():
 	v.save()
 
 def make_booking():
-	c = Customer.objects.get(id=4)
+	c = Customer.objects.get(id=5)
 	c.email = "1000"
-	d = Depot.objects.get(id=4)
-	v = Vehicle.objects.get(id=3)
+	d = Depot.objects.get(id=3)
+	v = Vehicle.objects.get(id=1)
 	now = datetime.datetime.now()
 	tom = now + datetime.timedelta(days=2)
 	
@@ -34,12 +34,12 @@ def make_booking():
 	
 	
 def delete_booking():
-	c = Customer.objects.get(id=4)
+	c = Customer.objects.get(id=5)
 	
 	booking_list = Booking.objects.bookings(c)
 	
 	print("customer's hours before deletion: {}".format(c.email))
 	
-	Booking.objects.delete_booking(c, booking_list[1])
+	Booking.objects.delete_booking(c, booking_list[0])
 	
 	print("customer's hours after deletion: {}".format(c.email))
