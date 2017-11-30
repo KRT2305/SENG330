@@ -68,18 +68,21 @@ def profile(request, customer_id):
     )
 
 @login_required
+@csrf_exempt
 def create_booking(request, customer_id):
     is_user(request, customer_id)
-    if request.method == "POST":
-        
+    if request.method == "post":
         form = CreateBookingForm(request.POST)
         if form.is_valid():
-            depot = form.cleaned_data['depot']
+            #depot = form.cleaned_data['depot']
+            depot = Depot.objects.get(customer_id=customer_id)
             vehicle_type = form.cleaned_data['vehicle_type']
             start_time = form.cleaned_data['start_time']
             end_time = form.cleaned_data['end_time']
 
             vehicle = Vehicle.objects.vehicles(depot, vehicle_type)
+            print(vehicle)
+            # d = Depot.objects.depots(depot)
             v = 0
             for item in vehicle:
                 bookings = Booking.objects.bookings(depot=depot, vehicle=item)
@@ -97,15 +100,29 @@ def create_booking(request, customer_id):
                 if v:
                     break
 
+            print(v)
             if not v:
-                print('BOOKING COULD NOT BE CREATED')
+                return HttpResponse('BOOKING COULD NOT BE CREATED')
                 
+            print("creating booking")
             b = Booking.objects.create_booking(Customer.objects.get(id=customer_id), v, depot, start_time, end_time)
+            b.save()
+            print(b)
             return rendor(request, 'booking_created.html')
         
     else:
         form = CreateBookingForm()
-    return render(request, 'create_booking.html', {'form':form})
+        return render(request, 'create_booking.html', {'form':form})
+
+
+@login_required
+def booking_created(request, customer_id):
+    is_user(request, customer_id)
+    return render(
+        request,
+        'booking_created.html',
+        context={'customer_id': customer_id},
+    )
 
 @login_required
 def my_bookings(request, customer_id):
