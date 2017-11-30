@@ -22,7 +22,9 @@ class DepotManager(models.Manager):
 	def get_queryset(self):
 		return DepotQuerySet(self.model, using=self._db)
 
-	def depots(self):
+	def depots(self, address=None):
+		if address:
+			return self.get_queryset().depots(address=address)
 		return self.get_queryset().depots()
 
 
