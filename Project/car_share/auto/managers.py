@@ -14,16 +14,6 @@ class CustomerManager(models.Manager):
 	def create_customer(self, username, first_name, last_name, hours, password):
 		return self.create(username=username, first_name=first_name, last_name=last_name, email=hours, password=password)
 
-	'''@receiver(post_save, sender=User)
-	def create_user_customer(sender, instance, created, **kwargs):
-		if created:
-			Customer.objects.create(user=instance)
-
-	@receiver(post_save, sender=User)
-	def save_user_customer(sender, instance, **kwargs):
-		instance.customer.save()'''
-	# users = User.objects.all().select_related('Customer')
-
 
 class DepotManager(models.Manager):
 	def create_depot(self, address, name, city, state):
@@ -77,23 +67,7 @@ class BookingManager(models.Manager):
 		if depot:
 			return self.get_queryset().bookings(depot=depot)
 		return self.get_queryset().bookings()
-
-'''	
-def find_available_vehicle(depot, v_type, start_time, end_time):
-	vehicle_list = Vehicle.objects.vehicles(depot, v_type)
-	#vehicle_list = Vehicle.objects.get_queryset().vehicles(depot, v_type)
 	
-
-	for item in vehicle_list:
-		if item.Vehicle.v_type != v_type:
-			continue
-		b_start = item.start_time - datetime.timedelta(days=2)
-		b_end = item.end_time + datetime.timedelta(days=2)
-
-		if start_time > b_end or end_time < b_start:
-			return item.vehicle
-	return -1
-'''		
 
 
 
