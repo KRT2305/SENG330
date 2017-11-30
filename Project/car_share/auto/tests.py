@@ -40,6 +40,6 @@ def delete_booking():
 	
 	print("customer's hours before deletion: {}".format(c.email))
 	
-	Booking.objects.delete_booking(c, booking[1])
+	Booking.objects.delete_booking(c, booking_list[1])
 	
 	print("customer's hours after deletion: {}".format(c.email))
