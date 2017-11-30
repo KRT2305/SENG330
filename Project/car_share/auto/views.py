@@ -1,14 +1,15 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
-from .models import Customer, Depot, Vehicle, Booking
+from .models import *
+from .managers import *
 #from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import Http404
 from django.contrib.auth.decorators import * 
 from .forms import RegistrationForm
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
-from .models import *
+
 from django.contrib.sites.shortcuts import *
 from django.utils.encoding import *
 
@@ -20,6 +21,7 @@ from .tokens import account_activation_token
 
 from django.core.mail import send_mail
 
+EMAIL_HOST_USER = 'whipvic@gmail.com'
 
 @login_required
 def index(request):
@@ -77,6 +79,7 @@ def my_bookings(request, customer_id):
         context={'booking_list': booking_list,},
     )
 
+
 @csrf_exempt
 def signup(request):
     """if request.method == "GET":
@@ -98,10 +101,10 @@ def signup(request):
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            user = form.instance
-            user.is_active = False
-            
-            user.save()
+            #user = form.instance
+            #user.is_active = False
+            user = Customer.objects.create_customer(form.cleaned_data['username'], form.cleaned_data['first_name'], form.cleaned_data['last_name'], form.cleaned_data['email'], form.cleaned_data['password1'])
+            #user.save()
             current_site = get_current_site(request)
             subject = 'Activate Your car_share Account'
             raw_password = form.cleaned_data.get('password1')
@@ -142,7 +145,7 @@ def activate(request, uidb64, token):
 
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
-        user.profile.email_confirmed = True
+        #user.email_confirmed = True
         #user.save()
         #login(request, user)
         #return HttpResponse('Thank you for your email confirmation. This is your account.')
@@ -154,6 +157,4 @@ def activate(request, uidb64, token):
 
 '''def account_activated(request):
     return render(request, 'account_activated')'''
-
-
 
