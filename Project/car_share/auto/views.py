@@ -1,14 +1,13 @@
 from django.http import HttpResponse
 from django.shortcuts import render, redirect
 from django.contrib.auth import authenticate, login
-from .models import *
-from .managers import *
 #from django.contrib.auth.decorators import login_required, user_passes_test
 from django.http import Http404
 from django.contrib.auth.decorators import * 
 from .forms import RegistrationForm
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
+from django import forms
 
 from django.contrib.sites.shortcuts import *
 from django.utils.encoding import *
@@ -20,6 +19,9 @@ from django.template.loader import render_to_string
 from .tokens import account_activation_token
 
 from django.core.mail import send_mail
+
+from .models import *
+from .managers import *
 
 EMAIL_HOST_USER = 'whipvic@gmail.com'
 
@@ -162,4 +164,9 @@ def activate(request, uidb64, token):
 
 '''def account_activated(request):
     return render(request, 'account_activated')'''
+
+class UserForm(forms.ModelForm):
+    class Meta:
+        mode = User
+        fields = ['first_name', 'last_name', 'email']
 
