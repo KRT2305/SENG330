@@ -71,7 +71,7 @@ def create_booking(request, customer_id):
     if request.method == "GET":
         form = CreateBookingForm(request.POST)
         if form.is_valid():
-            return rendor(request, 'booking_created.html')
+            return render(request, 'booking_created.html', {'form':form})
         
     else:
         form = CreateBookingForm()
