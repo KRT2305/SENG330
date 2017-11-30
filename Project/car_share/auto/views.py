@@ -120,7 +120,14 @@ def my_bookings(request, customer_id):
 @login_required
 def delete_bookings(request, customer_id):
     if_user(request, customer_id)
-    booking_list = Booking.objects.bookings(Customer.objects.get(id=customer_id))
+    if request.method == 'DELETE':
+        booking = form.cleaned_data['booking']
+        Booking.objects.delete_booking(Customer.objects.get(id=customer_id, booking)
+        return render(
+            request,
+            'delete_booking.htm',
+            context={'booking': booking},
+        )
 '''
 
 @csrf_exempt
