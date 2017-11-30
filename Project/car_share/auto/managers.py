@@ -68,6 +68,20 @@ class BookingManager(models.Manager):
 			return self.get_queryset().bookings(depot=depot)
 		return self.get_queryset().bookings()
 	
+	def delete_booking(self, customer, booking):
+		start_time = booking.start_time
+		end_time = booking.end_time
+		td = end_time - start_time
+		days, seconds = td.days, td.seconds
+		hours = days * 24 + seconds // 3600
+		
+		customer.email = "{}".format(int(customer.email) + hours)
+		customer.save()
+		booking.delete()
 
-
+'''__calc_hours(start_time, end_time):  # WILL BE USED TO REMOVE REDUNDENCY
+	td = end_time - start_time
+	days, seconds = td.days, td.seconds
+	hours = days * 24 + seconds // 3600
+	return hours'''
 
