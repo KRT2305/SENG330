@@ -155,3 +155,9 @@ class RegistrationFormNoFreeEmail(RegistrationForm):
         return self.cleaned_data['email']
 
 
+class UserForm(forms.ModelForm):
+    class Meta:
+        mode = User
+        fields = ['first_name', 'last_name', 'email']
+
+
