@@ -23,6 +23,11 @@ from django.core.mail import send_mail
 
 EMAIL_HOST_USER = 'whipvic@gmail.com'
 
+def is_user(request, customer_id):
+    current_customer = Customer.objects.get(id=customer_id)
+    if not request.user == current_customer:
+        return http.HttpResponse(404)
+
 @login_required
 def index(request):
     customer_list = Customer.objects.order_by('last_name')
@@ -38,12 +43,9 @@ def index(request):
 def detail(request, customer_id):
     return HttpResponse("You're viewing customer %s" % customer_id)
 
-'''def logged_in():
-    return (Customer.objects.get(id=customer_id)) =='''
-
 @login_required
-#@user_passes_test(logged_in)
 def bookings(request, customer_id):
+    is_user(request, customer_id)
     booking_list = Booking.objects.bookings(Customer.objects.get(id=customer_id))
     return render(
         request,
@@ -53,6 +55,7 @@ def bookings(request, customer_id):
 
 @login_required
 def profile(request, customer_id):
+    is_user(request, customer_id)
     current_customer = Booking.objects.bookings(Customer.objects.get(id=customer_id))
     return render(
         request,
@@ -62,6 +65,7 @@ def profile(request, customer_id):
 
 @login_required
 def create_booking(request, customer_id):
+    is_user(request, customer_id)
     current_customer = Customer.objects.get(id=customer_id)
     depot_list = Depot.objects.depots()
     return render(
@@ -72,6 +76,7 @@ def create_booking(request, customer_id):
 
 @login_required
 def my_bookings(request, customer_id):
+    is_user(request, customer_id)
     booking_list = Booking.objects.bookings(Customer.objects.get(id=customer_id))
     return render(
         request,
@@ -122,7 +127,7 @@ def signup(request):
             #return redirect('index')
     else:
             form = RegistrationForm()
-    return (render(request, 'registration_form.html', {'form': form}))
+    return render(request, 'registration_form.html', {'form': form})
 
 
 
