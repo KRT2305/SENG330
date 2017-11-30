@@ -6,10 +6,14 @@ import datetime
 def create_user():
 	c = Customer.objects.create_customer('testemail@email.com', 'test', 'account', '100', 'password')
 	c.save()
+	print(c.id)
+	
+#def create_vehicle():
 	
 
 def make_booking():
-	c = Customer.objects.get(id=1)
+	c = Customer.objects.get(id=2)
+	c.email = "1000"
 	d = Depot.objects.get(id=1)
 	v = Vehicle.objects.get(id=1)
 	now = datetime.datetime.now()
