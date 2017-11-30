@@ -2,7 +2,9 @@ from django.db import models
 
 
 class DepotQuerySet(models.QuerySet):
-	def depots(self):
+	def depots(self, address=None):
+		if address:
+			return self.filter(address=address)
 		return self
 
 
