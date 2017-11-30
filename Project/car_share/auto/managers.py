@@ -1,23 +1,33 @@
 from django.db import models
-
-from .querysets import *
-
 from django.db import connection
-#import datetime
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 from django.contrib.auth.models import UserManager
-from .models import *
+
+import datetime
+
+from .querysets import *
+
 
 class CustomerManager(models.Manager):
-	def create_customer(self, username, first_name, last_name, email, password):
-		return self.create(username=username, first_name=first_name, last_name=last_name, email=email, password=password)
+	def create_customer(self, username, first_name, last_name, hours, password):
+		return self.create(username=username, first_name=first_name, last_name=last_name, email=hours, password=password)
+
+	'''@receiver(post_save, sender=User)
+	def create_user_customer(sender, instance, created, **kwargs):
+		if created:
+			Customer.objects.create(user=instance)
+
+	@receiver(post_save, sender=User)
+	def save_user_customer(sender, instance, **kwargs):
+		instance.customer.save()'''
+	# users = User.objects.all().select_related('Customer')
 
 
 class DepotManager(models.Manager):
-	def create_depot(self, address):
-		return self.create(address=address)
+	def create_depot(self, address, name, city, state):
+		return self.create(address=address, name=name, city=city, state=state)
 	
 	def get_queryset(self):
 		return DepotQuerySet(self.model, using=self._db)
@@ -43,8 +53,18 @@ class VehicleManager(models.Manager):
 
 
 class BookingManager(models.Manager):
-	def create_booking(self, customer, vehicle, depot, booking_time):
-		return self.create(customer=customer, vehicle=vehicle, depot=depot, booking_time=booking_time)
+	def create_booking(self, customer, vehicle, depot, start_time, end_time):
+		if start_time > end_time:
+			return 0
+		td = end_time - start_time
+		days, seconds = td.days, td.seconds
+		hours = days * 24 + seconds // 3600
+		if hours > int(customer.email):
+			return -1
+
+		customer.email = "{}".format(int(customer.email) - hours)
+		customer.save()
+		return self.create(customer=customer, vehicle=vehicle, depot=depot, start_time=start_time, end_time=end_time)
 
 	def get_queryset(self):
 		return BookingQuerySet(self.model, using=self._db)
@@ -58,16 +78,22 @@ class BookingManager(models.Manager):
 			return self.get_queryset().bookings(depot=depot)
 		return self.get_queryset().bookings()
 
-'''class ProfileManager(models.Manager):
-	@receiver(post_save, sender=User)
-	def create_profile(sender, instance, created, *args, **kwargs):
-		# ignore if this is an existing User
-		if not created:
-			return
-		Profile.objects.create(user=instance)
-		post_save.connect(create_profile, sender=User)
+'''	
+def find_available_vehicle(depot, v_type, start_time, end_time):
+	vehicle_list = Vehicle.objects.vehicles(depot, v_type)
+	#vehicle_list = Vehicle.objects.get_queryset().vehicles(depot, v_type)
 	
-	@receiver(post_save, sender=User)
-	def save_user_profile(sender, instance, **kwargs):
-		instance.profile.save()'''
+
+	for item in vehicle_list:
+		if item.Vehicle.v_type != v_type:
+			continue
+		b_start = item.start_time - datetime.timedelta(days=2)
+		b_end = item.end_time + datetime.timedelta(days=2)
+
+		if start_time > b_end or end_time < b_start:
+			return item.vehicle
+	return -1
+'''		
+
+
 

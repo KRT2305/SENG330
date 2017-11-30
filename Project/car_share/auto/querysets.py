@@ -18,6 +18,8 @@ class VehicleQuerySet(models.QuerySet):
 
 class BookingQuerySet(models.QuerySet):
 	def bookings(self, customer=None, vehicle=None, depot=None):
+		if vehicle and depot:
+			return self.filter(vehicle=vehicle, depot=depot)
 		if customer:
 			return self.filter(customer=customer)
 		if vehicle:
@@ -25,5 +27,7 @@ class BookingQuerySet(models.QuerySet):
 		if depot:
 			return self.filter(depot=depot)
 		return self
+
+
 
 
