@@ -74,8 +74,33 @@ def create_booking(request, customer_id):
         
         form = CreateBookingForm(request.POST)
         if form.is_valid():
+            depot = form.cleaned_data['depot']
+            vehicle_type = form.cleaned_data['vehicle_type']
+            start_date = form.cleaned_data['start_date']
+            end_time = form.cleaned_data['end_time']
 
-            #vehicle = Vehicle.objects.vehicles(form.depot, 
+            vehicle = Vehicle.objects.vehicles(depot, vehicle_type)
+            v = 0
+            for item in vehicle:
+                bookings = Booking.objects.bookings(depot=depot, vehicle=item)
+                if not bookings:
+                    v = item
+                    break
+                    
+                for booking in bookings:
+                    b_start = booking.start_time - datetime.timedelta(days=2)
+                    b_end = booking.end_time + datetime.timedelta(days=2)
+                    
+                    if start_time > b_end or end_time < b_start:
+                        v = item
+                        break
+                if v:
+                    break
+
+            if not v:
+                print('BOOKING COULD NOT BE CREATED')
+                
+            b = Booking.objects.create_booking(Customer.objects.get(id=customer_id), v, depot, start_time, end_time)
             return rendor(request, 'booking_created.html')
         
     else:
