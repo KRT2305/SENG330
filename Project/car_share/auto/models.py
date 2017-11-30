@@ -105,9 +105,9 @@ class Booking(models.Model):
 	    instance.profile.save()
 	post_save.connect(create_profile, sender=User)
 
-	'''@receiver(post_save, sender=User)
+	@receiver(post_save, sender=User)
 	def save_user_profile(sender, instance, **kwargs):
-    	 instance.profile.save()'''
+    	 instance.profile.save()
 
 class Profile(models.Model):
 	user = models.OneToOneField(User, on_delete=models.CASCADE)
