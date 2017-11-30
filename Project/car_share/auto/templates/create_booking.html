@@ -5,12 +5,13 @@
 		<div class = "flex _direction-column container"> 
 			{% block content %}
 			<h1>Create Booking</h1>
-  				<form method="post">
-    				{% csrf_token %}
-    				{{ form }}
-    			</form>
-			</div>
-			{% endblock %}
+			    {% for field in form %}
+			      <p>
+			        {{ field.label_tag }}<br>
+			        {{ field }}
+			     {% endfor %}
+			      </p>
+			 {% endblock %}
 		</div>
 	</body>
 </html>
