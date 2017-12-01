@@ -1,0 +1,17 @@
+{% extends "index.html" %}
+
+<html>
+	<body>
+		<div class = "flex _direction-column container">
+			{% block content %}
+			<h1>Delete Booking</h1>
+  				<form method="POST">
+    				{% csrf_token %}
+    				{{ form }}
+			<button type="submit">Delete</button>
+    			</form>
+			</div>
+			{% endblock %}
+		</div>
+	</body>
+</html>
