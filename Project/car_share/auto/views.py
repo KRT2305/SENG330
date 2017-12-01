@@ -85,7 +85,7 @@ def create_booking(request, customer_id):
 
 
             #d = Depot.objects.depots(depot)
-            vehicle = Vehicle.objects.vehicles(d, vehicle_type)
+            vehicle = Vehicle.objects.vehicles(depot, vehicle_type)
 
             
             v = 0            
