@@ -52,6 +52,4 @@ class RegistrationForm(forms.ModelForm):
 
 
 
-    '''Function which enforces uniqueness of
-    email addresses.'''
     
