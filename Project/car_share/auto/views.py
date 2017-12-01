@@ -83,7 +83,7 @@ def create_booking(request, customer_id):
             start_time = form.cleaned_data['start_time']
             end_time = form.cleaned_data['end_time']
 
-            return depot
+            #return depot
 
             #d = Depot.objects.depots(depot)
             vehicle = Vehicle.objects.vehicles(depot, vehicle_type)
