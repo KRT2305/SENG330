@@ -71,7 +71,9 @@ class BookingManager(models.Manager):
 	def get_queryset(self):
 		return BookingQuerySet(self.model, using=self._db)
 
-	def bookings(self, customer=None, vehicle=None, depot=None):
+	def bookings(self, customer=None, vehicle=None, depot=None, start_time=None):		
+		if start_time and customer:		
+			return self.get_queryset().bookings(customer=customer, start_time=start_time)
 		if customer:
 			return self.get_queryset().bookings(customer=customer)
 		if vehicle:

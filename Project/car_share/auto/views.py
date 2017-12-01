@@ -137,19 +137,25 @@ def my_bookings(request, customer_id):
         'my_bookings.html',
         context={'booking_list': booking_list,},
     )
-'''
+
 @login_required
 def delete_bookings(request, customer_id):
     if_user(request, customer_id)
     if request.method == 'DELETE':
         booking = form.cleaned_data['booking']
-        Booking.objects.delete_booking(Customer.objects.get(id=customer_id, booking)
+
+        customer = Customer.objects.get(id=customer_id)
+        b = booking.split('\n')
+
+        book = Booking.objects.bookings(customer=customer, b[3])
+
+        Booking.objects.delete_booking(customer, book)
         return render(
             request,
-            'delete_booking.htm',
+            'delete_booking.html',
             context={'booking': booking},
         )
-'''
+
 
 @csrf_exempt
 def signup(request):
