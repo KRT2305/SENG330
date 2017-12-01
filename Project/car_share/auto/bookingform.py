@@ -27,7 +27,20 @@ class CreateBookingForm(forms.ModelForm):
 	start_time = forms.DateTimeField()
 	end_time = forms.DateTimeField()
 
+class DeleteBooking(forms.ModelForm):
 
+	#gets request.user as the user id to query the bookings
+	def __init__(self, *args, **kwargs):
+		self.user = kwargs.pop('user', None)
+		super(DeleteBooking, self).__init__(*args, **kwargs)
+
+	class Meta:
+		model = Booking
+		fields = ('booking')
+
+	booking_list = Booking.objects.bookings(self.user)
+
+	created_booking = forms.ChoiceField(choices=[(created_booking.vehicle,created_booking.vehicle) for created_booking in booking_list])
 	
 	
 	
