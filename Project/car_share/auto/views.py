@@ -74,8 +74,9 @@ def create_booking(request, customer_id):
     if request.method == "post":
         form = CreateBookingForm(request.POST)
         if form.is_valid():
-            #depot = form.cleaned_data['depot']
-            depot = Depot.objects.get(customer_id=customer_id)
+            form.save()
+            depot = form.cleaned_data['depot']
+           # depot = Depot.objects.get(customer_id=customer_id)
             vehicle_type = form.cleaned_data['vehicle_type']
             start_time = form.cleaned_data['start_time']
             end_time = form.cleaned_data['end_time']

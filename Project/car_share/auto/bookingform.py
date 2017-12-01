@@ -17,7 +17,7 @@ class CreateBookingForm(forms.ModelForm):
 
 	class Meta:
 		model = Booking
-		fields = ('depot', 'vehicle_type', 'start_date', 'end_date')
+		fields = ('depot', 'vehicle_type', 'start_time', 'end_time')
 		widgets = { 'start_date': forms.DateTimeInput(attrs={'class':'datetime-input'})}
 
 	depot_list = Depot.objects.depots()
@@ -25,8 +25,8 @@ class CreateBookingForm(forms.ModelForm):
 
 	depot = forms.ChoiceField(choices=[(depot, depot) for depot in depot_list])
 	vehicle_type = forms.ChoiceField(choices=[x for x in vehicle_list])
-	start_date = forms.DateField(widget=forms.SelectDateWidget())
-	end_date = forms.DateField(widget=forms.SelectDateWidget())
+	start_time = forms.DateField(widget=forms.SelectDateWidget())
+	end_time = forms.DateField(widget=forms.SelectDateWidget())
 
 
 	# vehicle = Vehicle.objects.vehicles(depot, vehicle_type)
