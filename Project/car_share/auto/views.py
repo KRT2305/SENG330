@@ -85,7 +85,10 @@ def create_booking(request, customer_id):
 
 
             d = Depot.objects.depots(depot)
-            vehicle = Vehicle.objects.vehicles(d,vehicle_type)
+            vehicle = Vehicle.objects.vehicles(d, vehicle_type)
+
+            if not vehicle:
+                return -5
 
             b = Booking.objects.create_booking(customer, vehicle, d, start_time, end_time)
             b.save()
