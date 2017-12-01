@@ -142,11 +142,12 @@ def my_bookings(request, customer_id):
 def delete_bookings(request, customer_id):
     is_user(request, customer_id)
     if request.method == 'POST':
-        form = DeleteBooking(request.POST,user=request.user)
+        booking_list = Booking.objects.bookings(request.user)
+        form = DeleteBooking(request.POST,initial={'booking_list': booking_list}, user=request.user)
 
         booking = form.cleaned_data['booking']
 
-        customer = request.user()
+        customer = request.user
         customer.save()
         b = booking.split('\n')
 

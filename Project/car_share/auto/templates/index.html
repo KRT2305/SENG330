@@ -23,6 +23,7 @@
         <ul class="dropdown-menu">
           <li><a href="{% url 'create_booking' customer_id=user.id %}">Create Booking</a></li>
           <li><a href="{% url 'my_bookings' customer_id=user.id %}">My Bookings</a></li>
+          <li><a href="{% url 'delete_bookings' customer_id=user.id %}">Delete Bookings</a></li>
           
         </ul>
       </li>
