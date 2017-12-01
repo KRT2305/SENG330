@@ -43,16 +43,18 @@ class VehicleManager(models.Manager):
 		else:
 			return self.get_queryset().vehicles(depot, v_type)
 
-class TimeManager(models.Manager):
+'''class TimeManager(models.Manager):
 	def time_is_valid(self,time):
 		if start_time > end_time:
 			return 0
 		td = end_time - start_time
-		return td
+		return td '''
 
 class BookingManager(models.Manager):
-	def create_booking(self, customer, vehicle, depot, time):
-		is_valid(time)
+	def create_booking(self, customer, vehicle, depot, start_time, end_time):
+		if start_time > end_time:
+			return 0
+		td = end_time - start_time
 		days, seconds = td.days, td.seconds
 		hours = days * 24 + seconds // 3600
 		if hours > int(customer.email):
