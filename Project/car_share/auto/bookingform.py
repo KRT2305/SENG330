@@ -5,7 +5,7 @@ from django.contrib.admin import widgets
 from django.db import models
 from django.forms import ModelForm
 
-from .models import Booking, Depot, Vehicle
+from .models import Booking, Depot, Vehicle, Customer
 from .managers import *
 from .globals import TAXI_TYPES, DEPOTS
 
@@ -17,7 +17,6 @@ class CreateBookingForm(forms.ModelForm):
 		model = Booking
 		fields = ('vehicle_type', 'start_time', 'end_time')
 		exclude = ('user',)
-		#widgets = { 'start_date': forms.DateTimeInput(attrs={'class':'datetime-input'})}
 
 	depot_list = Depot.objects.depots()
 	vehicle_list = Vehicle.objects.vehicles()
@@ -27,13 +26,16 @@ class CreateBookingForm(forms.ModelForm):
 	start_time = forms.DateTimeField()
 	end_time = forms.DateTimeField()
 
-class DeleteBooking(forms.ModelForm):
+class DeleteBooking(forms.Form):
 
 	#gets request.user as the user id to query the bookings
 	def __init__(self, *args, **kwargs):
-		user = kwargs.pop('user')
-		super(DeleteBooking, self).__init__(*args, **kwargs)
-		self.fields['booking'] = forms.ChoiceField(choices=[(created_booking.vehicle,created_booking.vehicle) for created_booking in booking_list])
+		customer = kwargs.pop('customer')
+		super(DeleteBooking,self).__init__(*args, **kwargs)
+		self.fields['booking'] = forms.ModelChoiceField(queryset=Booking.objects.bookings(customer),required=False)
+
+#	booking_list = Booking.objects.bookings(Customer.objects.get(id=customer_id))
+	#self.fields['booking'] = forms.ModelChoiceField(choices=[(created_booking.vehicle,created_booking.vehicle) for created_booking in booking_list])
 
 	
 

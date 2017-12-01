@@ -43,13 +43,6 @@ class VehicleManager(models.Manager):
 		else:
 			return self.get_queryset().vehicles(depot, v_type)
 
-'''class TimeManager(models.Manager):
-	def time_is_valid(self,time):
-		if start_time > end_time:
-			return 0
-		td = end_time - start_time
-		return td '''
-
 class BookingManager(models.Manager):
 	def create_booking(self, customer, vehicle, depot, start_time, end_time):
 		if start_time > end_time:

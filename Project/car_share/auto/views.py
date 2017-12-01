@@ -131,68 +131,50 @@ def booking_created(request, customer_id):
 @login_required
 def my_bookings(request, customer_id):
     is_user(request, customer_id)
+    customer=Customer.objects.get(id=customer_id)
     booking_list = Booking.objects.bookings(Customer.objects.get(id=customer_id))
     return render(
         request,
         'my_bookings.html',
-        context={'booking_list': booking_list,},
+        context={'booking_list': booking_list,'customer_id':customer},
     )
 
 @login_required
 def delete_bookings(request, customer_id):
     is_user(request, customer_id)
     if request.method == 'POST':
-        booking_list = Booking.objects.bookings(request.user)
-        form = DeleteBooking(request.POST,initial={'booking_list': booking_list}, user=request.user)
+        form = DeleteBooking(request.POST, customer=customer_id)
+        if form.is_valid():
+            booking = form.cleaned_data['booking']
+            b = str(booking)
+            customer = request.user
+            b.split('\n')
 
-        booking = form.cleaned_data['booking']
+            book = Booking.objects.bookings(customer, b[3])
 
-        customer = request.user
-        customer.save()
-        b = booking.split('\n')
-
-        book = Booking.objects.bookings(customer, b[3])
-
-        Booking.objects.delete_booking(customer, book[0])
-        return render(
-            request,
-            'booking_deleted.html',
-        )
+            Booking.objects.delete_booking(customer, book[0])
+            return render(
+                request,
+                'booking_deleted.html',
+            )
     else:
-        form = DeleteBooking()
+        booking_list = Booking.objects.bookings(Customer.objects.get(id=customer_id))
+        form = DeleteBooking(initial={'booking_list': booking_list}, customer=customer_id)
         return render(request, 'delete_booking.html', {'form': form})
 
 
 @csrf_exempt
 def signup(request):
-    """if request.method == "GET":
-        form = RegistrationForm()
-        return render(request, 'registration_form.html',{'form': form})
-    if request.method == "POST":
-        form = RegistrationForm(data = request.POST)
-        if form.is_valid():
-            
-            user = form.save()
-            user.refresh_from_db()
-            user.set_password(user.password)
-            user.save()
-            user = authenticate(username=user.username, password=request.POST['password1'])
-            login(request, user)
-
-            return redirect('index')"""
-
     if request.method == 'POST':
         form = RegistrationForm(request.POST)
         if form.is_valid():
-            #user = form.instance
-            #user.is_active = False
+
             password = form.cleaned_data['password1']
             hashed_password = make_password(password, None, 'md5')
             user = Customer.objects.create_customer(form.cleaned_data['email'], form.cleaned_data['first_name'], form.cleaned_data['last_name'], form.cleaned_data['email'], hashed_password)
             user.save()
             user.is_active = False
-            
-            #user.set_password(varhash)
+
             current_site = get_current_site(request)
             subject = 'Activate Your CarShare Account'
             raw_password = form.cleaned_data.get('password1')
@@ -207,7 +189,7 @@ def signup(request):
             send_mail(subject, message,from_email,to_list,fail_silently=False, )
             
             return render(request, 'account_activation_sent.html')
-            #return redirect('index')
+
     else:
             form = RegistrationForm()
     return render(request, 'registration_form.html', {'form': form})
@@ -233,19 +215,9 @@ def activate(request, uidb64, token):
 
     if user is not None and account_activation_token.check_token(user, token):
         user.is_active = True
-        '''clearPassNoHash = 
-        varhash = make_password(clearPassNoHash, None, 'md5')
-        user.set_password(varhash)'''
-        #user.email_confirmed = True
         user.save()
-        #login(request, user)
-        #return HttpResponse('Thank you for your email confirmation. This is your account.')
-        #return redirect(request,'account_activated')
         return render(request, 'account_activated.html')
 
     else:
         return  HttpResponse('Activation link is invalid!')
-
-'''def account_activated(request):
-    return render(request, 'account_activated')'''
 
