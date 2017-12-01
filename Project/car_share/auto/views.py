@@ -152,7 +152,7 @@ def delete_bookings(request, customer_id):
 
         book = Booking.objects.bookings(customer, b[3])
 
-        Booking.objects.delete_booking(customer, book)
+        Booking.objects.delete_booking(customer, book[0])
         return render(
             request,
             'booking_deleted.html',
