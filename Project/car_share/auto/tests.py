@@ -25,12 +25,12 @@ def make_booking():
 	now = datetime.datetime.now()
 	tom = now + datetime.timedelta(days=2)
 	
-	print("customer's hours before booking: {}".format(c.email))
+	print("customer's hours before booking: {}".format(c.last_name))
 	
 	b = Booking.objects.create_booking(c, v, d, now, tom)
 
 	print(b)
-	print("customer's hours after booking: {}".format(c.email))
+	print("customer's hours after booking: {}".format(c.last_name))
 	
 	
 def delete_booking():
@@ -38,8 +38,8 @@ def delete_booking():
 	
 	booking_list = Booking.objects.bookings(c)
 	
-	print("customer's hours before deletion: {}".format(c.email))
+	print("customer's hours before deletion: {}".format(c.last_name))
 	
 	Booking.objects.delete_booking(c, booking_list[0])
 	
-	print("customer's hours after deletion: {}".format(c.email))
+	print("customer's hours after deletion: {}".format(c.last_name))

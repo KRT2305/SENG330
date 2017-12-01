@@ -11,8 +11,8 @@ from .querysets import *
 
 
 class CustomerManager(models.Manager):
-	def create_customer(self, username, first_name, last_name, hours, password):
-		return self.create(username=username, first_name=first_name, last_name=last_name, email=hours, password=password)
+	def create_customer(self, username, first_name, hours, email, password):
+		return self.create(username=username, first_name=first_name, last_name=hours, email=email, password=password)
 
 
 class DepotManager(models.Manager):
@@ -57,10 +57,14 @@ class BookingManager(models.Manager):
 		td = end_time - start_time
 		days, seconds = td.days, td.seconds
 		hours = days * 24 + seconds // 3600
-		
-		if hours > int(float(customer.email)):
-			return -1
-		customer.email = "{}".format(int(customer.email) - hours)
+
+		try:
+			if hours > int(customer.last_name):
+				return -1
+		except:
+			return -2
+
+		customer.last_name = "{}".format(int(customer.last_name) - hours)
 		customer.save()
 		return self(customer=customer, vehicle=vehicle, depot=depot, start_time=start_time, end_time=end_time)
 
@@ -83,7 +87,7 @@ class BookingManager(models.Manager):
 		days, seconds = td.days, td.seconds
 		hours = days * 24 + seconds // 3600
 		
-		customer.email = "{}".format(int(customer.email) + hours)
+		customer.last_name = "{}".format(int(customer.last_name) + hours)
 		customer.save()
 		booking.delete()
 
