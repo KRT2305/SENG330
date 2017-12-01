@@ -84,7 +84,7 @@ def create_booking(request, customer_id):
             end_time = form.cleaned_data['end_time']
 
 
-            d = Depot.objects.depots(depot)
+            #d = Depot.objects.depots(depot)
             vehicle = Vehicle.objects.vehicles(d, vehicle_type)
 
             
@@ -108,7 +108,7 @@ def create_booking(request, customer_id):
             if not v:
                 return -5
 
-            b = Booking.objects.create_booking(customer, v, d, start_time, end_time)
+            b = Booking.objects.create_booking(customer, v, depot, start_time, end_time)
             b.save()
             print(b)
             return render(request, 'booking_created.html')
