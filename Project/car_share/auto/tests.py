@@ -4,17 +4,23 @@ from .models import Customer, Vehicle, Depot, Booking
 import datetime
 
 def make_user():
-	c = Customer.objects.create_customer('testemail@email.com', 'test', 'account', '100', 'password')
+	c = Customer.objects.create_customer('testemail@email.com', 'test', '100', 'account', 'password')
 	c.save()
 	print(c.id)
 	
 def make_depot():
-	d = Depot.objects.create_depot('1520Pear', 'Pear', 'vic', 'BC')
+	d = Depot.objects.create_depot('1520Pear')
 	d.save()
+
+def spawn_depot_with_vehicles():
+	d = Depot.objects.create_depot('FULLOFTRUCKS')
+	d.save()
+	v = [Vehicle.objects.create_vehicle(d, 'truck', '{}LIC'.format(i)) for i in range(100)]
+	[item.save() for item in v]
 
 def make_vehicle():
 	d = Depot.objects.get(id=3)
-	v = Vehicle.objects.create_vehicle(d, True, 'truck', 'K0SA21H')
+	v = Vehicle.objects.create_vehicle(d, 'truck', 'K0SA21H')
 	v.save()
 
 def make_booking():
