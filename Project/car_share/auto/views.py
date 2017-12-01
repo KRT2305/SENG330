@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login
 from django.http import Http404
 from django.contrib.auth.decorators import * 
 from .forms import RegistrationForm
-from .bookingform import CreateBookingForm
+#from .bookingform import CreateBookingForm
 from django.views.decorators.csrf import csrf_exempt
 from django.contrib.auth.models import User
 
@@ -71,46 +71,27 @@ def profile(request, customer_id):
 @csrf_exempt
 def create_booking(request, customer_id):
     is_user(request, customer_id)
-    if request.method == "post":
+    if request.method == 'POST':
         form = CreateBookingForm(request.POST)
         if form.is_valid():
-            form.save()
+
+            customer = request.user
+            customer.save()
+
             depot = form.cleaned_data['depot']
-           # depot = Depot.objects.get(customer_id=customer_id)
             vehicle_type = form.cleaned_data['vehicle_type']
             start_time = form.cleaned_data['start_time']
             end_time = form.cleaned_data['end_time']
 
-            vehicle = Vehicle.objects.vehicles(depot, vehicle_type)
-            print(vehicle)
-            # d = Depot.objects.depots(depot)
-            v = 0
-            for item in vehicle:
-                bookings = Booking.objects.bookings(depot=depot, vehicle=item)
-                if not bookings:
-                    v = item
-                    break
-                    
-                for booking in bookings:
-                    b_start = booking.start_time - datetime.timedelta(days=2)
-                    b_end = booking.end_time + datetime.timedelta(days=2)
-                    
-                    if start_time > b_end or end_time < b_start:
-                        v = item
-                        break
-                if v:
-                    break
 
-            print(v)
-            if not v:
-                return HttpResponse('BOOKING COULD NOT BE CREATED')
-                
-            print("creating booking")
-            b = Booking.objects.create_booking(Customer.objects.get(id=customer_id), v, depot, start_time, end_time)
+            d = Depot.objects.depots(depot)
+            vehicle = Vehicle.objects.vehicles(d,vehicle_type)
+
+            b = Booking.objects.create_booking(customer, vehicle, d, start_time, end_time)
             b.save()
             print(b)
-            return rendor(request, 'booking_created.html')
-        
+            return render(request, 'booking_created.html')
+
     else:
         form = CreateBookingForm()
         return render(request, 'create_booking.html', {'form':form})

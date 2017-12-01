@@ -57,12 +57,11 @@ class BookingManager(models.Manager):
 		td = end_time - start_time
 		days, seconds = td.days, td.seconds
 		hours = days * 24 + seconds // 3600
-		if hours > int(customer.email):
+		if hours > 1000:
 			return -1
-
 		customer.email = "{}".format(int(customer.email) - hours)
 		customer.save()
-		return self.create(customer=customer, vehicle=vehicle, depot=depot, start_time=start_time, end_time=end_time)
+		return self(customer=customer, vehicle=vehicle, depot=depot, start_time=start_time, end_time=end_time)
 
 	def get_queryset(self):
 		return BookingQuerySet(self.model, using=self._db)

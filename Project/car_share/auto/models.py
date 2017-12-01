@@ -12,7 +12,7 @@ import datetime
 #from django.utils.encoding import python_2_unicode_compatible
 
 from .managers import *
-from .globals import TAXI_TYPES
+from .globals import TAXI_TYPES, DEPOTS
 
 
 #  docs.djangoproject.com/en/1.11/ref/models/instances/#creating-objects
@@ -21,20 +21,20 @@ from .globals import TAXI_TYPES
 class Customer(User):
 	objects = CustomerManager()
 
+
 	class Meta:
 		proxy = True  
 
 class Depot(models.Model):
 	address = models.CharField(max_length=200)
-	name = models.CharField(max_length=200,default=' ')
-	city = models.CharField(max_length=200,default=' ')
-	state = models.CharField(max_length= 200,default=' ')
+	name = models.CharField(max_length=200,default="hello")
+	city = models.CharField(max_length=200,default="hello")
+	state = models.CharField(max_length= 200,default="hello")
 	
 	objects = DepotManager()
 
 	def __str__(self):
 		return "{}-{}".format(self.name, self.city)
-		# return ''.join(['{}:: {}\n'.format(attr, value) for attr, value in self.__dict__.items()])
 
 
 class Vehicle(models.Model):

@@ -7,64 +7,27 @@ from django.forms import ModelForm
 
 from .models import Booking, Depot, Vehicle
 from .managers import *
-from .globals import TAXI_TYPES
+from .globals import TAXI_TYPES, DEPOTS
 
 import datetime
-
-YEAR_CHOICES = ('1980', '1981', '1982')
 
 class CreateBookingForm(forms.ModelForm):
 
 	class Meta:
 		model = Booking
-		fields = ('depot', 'vehicle_type', 'start_time', 'end_time')
-		widgets = { 'start_date': forms.DateTimeInput(attrs={'class':'datetime-input'})}
+		fields = ('vehicle_type', 'start_time', 'end_time')
+		exclude = ('user',)
+		#widgets = { 'start_date': forms.DateTimeInput(attrs={'class':'datetime-input'})}
 
 	depot_list = Depot.objects.depots()
-	vehicle_list = TAXI_TYPES
+	vehicle_list = Vehicle.objects.vehicles()
 
-	depot = forms.ChoiceField(choices=[(depot, depot) for depot in depot_list])
-	vehicle_type = forms.ChoiceField(choices=[x for x in vehicle_list])
-	start_time = forms.DateField(widget=forms.SelectDateWidget())
-	end_time = forms.DateField(widget=forms.SelectDateWidget())
+	depot = forms.ChoiceField(choices=[(depot.address,depot.address) for depot in depot_list])
+	vehicle_type = forms.ChoiceField(choices=[(vehicle_type.v_type,vehicle_type.v_type) for vehicle_type in vehicle_list])
+	start_time = forms.DateTimeField()
+	end_time = forms.DateTimeField()
 
 
-	# vehicle = Vehicle.objects.vehicles(depot, vehicle_type)
-	# v = 0
-	# for item in vehicle:
-	# 	bookings = Booking.objects.bookings(depot=depot, vehicle=item)
-	# 	if not bookings:
-	# 		v = item
-	# 		break
-	# 	for booking in bookings:
-	# 		b_start = booking.start_time - datetime.timedelta(days=2)
-	# 		b_end = booking.end_time + datetime.timedelta(days=2)
-			
-	# 		if start_time > b_end or end_time < b_start:
-	# 			v = item
-	# 			break
-# =======
-
-# 	vehicle = Vehicle.objects.vehicles(depot, vehicle_type)
-# 	v = 0
-# 	for item in vehicle:
-# 		bookings = Booking.objects.bookings(depot=depot, vehicle=item)
-# 		if not bookings:
-# 			v = item
-# 			break
-# 		for booking in bookings:
-# 			b_start = booking.start_time - datetime.timedelta(days=2)
-# 			b_end = booking.end_time + datetime.timedelta(days=2)
-			
-# 			if start_time > b_end or end_time < b_start:
-# 				v = item
-# 				break
-# 		if v:
-# 			break
-
-	# if not v:
-	# 	print("error, no vehicles of that type available")
-	
 	
 	
 	

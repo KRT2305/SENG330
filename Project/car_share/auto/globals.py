@@ -15,6 +15,13 @@ TAXI_TYPES =(
         ('OTHER', 'Other'),
 )
 
+
+DEPOTS =(
+        ('PEAR ST','PEAR ST'),
+        ('VIEW ST', 'VIEW ST'),
+        ('UVIC', 'UVIC'),
+)
+
 PAYMENT_STATUS =(
         ('DONE', 'Successful'),
         ('PENDING', 'Later'),
