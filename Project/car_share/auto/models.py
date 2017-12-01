@@ -24,7 +24,6 @@ class Customer(User):
 	class Meta:
 		proxy = True  
 
-
 class Depot(models.Model):
 	address = models.CharField(max_length=200)
 	name = models.CharField(max_length=200,default=' ')
