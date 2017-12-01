@@ -2,7 +2,6 @@ exclude:
 - /Project/car_share/auto/migrations/.*
 - /Project/car_share/car_share/settings.py
 - /Project/car_share/auto/settings.py
-- /fake_project/car_share/auto/.*
 component_depth: 3
 languages:
 - python
