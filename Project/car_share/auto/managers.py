@@ -66,7 +66,7 @@ class BookingManager(models.Manager):
 
 		customer.last_name = "{}".format(int(customer.last_name) - hours)
 		customer.save()
-		return self(customer=customer, vehicle=vehicle, depot=depot, start_time=start_time, end_time=end_time)
+		return self.create(customer=customer, vehicle=vehicle, depot=depot, start_time=start_time, end_time=end_time)
 
 	def get_queryset(self):
 		return BookingQuerySet(self.model, using=self._db)
