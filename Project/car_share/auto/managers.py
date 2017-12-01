@@ -16,8 +16,8 @@ class CustomerManager(models.Manager):
 
 
 class DepotManager(models.Manager):
-	def create_depot(self, address, name, city, state):
-		return self.create(address=address, name=name, city=city, state=state)
+	def create_depot(self, address):
+		return self.create(address=address)
 	
 	def get_queryset(self):
 		return DepotQuerySet(self.model, using=self._db)
@@ -29,8 +29,8 @@ class DepotManager(models.Manager):
 
 
 class VehicleManager(models.Manager):
-	def create_vehicle(self, depot, available, v_type, license):
-		return self.create(depot=depot, available=available, v_type=v_type, license=license)
+	def create_vehicle(self, depot, v_type, license):
+		return self.create(depot=depot, v_type=v_type, license=license)
 
 	def get_queryset(self):
 		return VehicleQuerySet(self.model, using=self._db)
@@ -57,7 +57,8 @@ class BookingManager(models.Manager):
 		td = end_time - start_time
 		days, seconds = td.days, td.seconds
 		hours = days * 24 + seconds // 3600
-		if hours > 1000:
+		
+		if hours > int(float(customer.email)):
 			return -1
 		customer.email = "{}".format(int(customer.email) - hours)
 		customer.save()
