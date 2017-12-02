@@ -7,6 +7,15 @@
 - type python3 manage.py runserver
 - visit 127.0.0.1:8000/auto to begin signup
 
+## to set customer hours:
+- go to 127.0.0.1:8000/admin and login
+- username: admin
+ - password: getthemoney
+- click on the customer under "Users"
+- set the last name field to the number of hours to allocate
+
+*note: when creating bookings, depot must match the vehicle it is assigned to in admin
+
  ## FILES
  ### models.py
  contains base classes
