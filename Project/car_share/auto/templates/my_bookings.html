@@ -1,13 +1,21 @@
 {% extends "index.html" %}
 
 <html>
-	<body>
-		<div class = "flex _direction-column container"> 
-			{% block content %}
-			<h1>My Hours: {{ customer_id.last_name }}<br></h1>
-			<h2>My Bookings:<br></h2>
+{% block content %}
+<head>
+	<style>
+		.container{
+			margin-top: 50px;
+		}
+	</style>
+</head>
 
-			<div class = "container-content"> 
+	<body>
+		<div class = "jumbotron text-center"> 
+			<h1>My Bookings:<br></h1>
+			<h2>My Hours: {{ customer_id.last_name }}<br></h2>
+
+			<div class = "container"> 
 
 			    <table class="table">
 				  <thead>

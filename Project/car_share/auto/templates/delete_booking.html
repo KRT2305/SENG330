@@ -2,13 +2,15 @@
 
 <html>
 	<body>
-		<div class = "flex _direction-column container">
-			{% block content %}
+		{% block content %}
+		<div class = "jumbotron text-center">
 			<h1>Delete Booking</h1>
   				<form method="POST">
     				{% csrf_token %}
-    				{{ form }}
-				<button type="submit">Delete</button>
+    				{% for field in form %}
+    					<p class="font-weight-bold">{{ field.label }} {{ field }}</p>
+    				{% endfor %}
+				<button type="button" class="btn btn-outline-primary">Delete</button>
     			</form>
 			</div>
 			{% endblock %}
